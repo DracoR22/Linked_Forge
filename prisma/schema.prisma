@@ -12,9 +12,10 @@ datasource db {
 
 model User {
   id String @id @default(uuid()) @map("_id") 
-  userName String?
+  name String?
   email String? @unique
   emailVerified DateTime?
+  image String?
   hashedPassword String?
 
   accounts Account[]
@@ -46,7 +47,7 @@ model Account {
 model Assistant {
   id String @id @default(uuid()) @map("_id") 
   name String
-  description String
+  title String
   instructions String
 
   userId String

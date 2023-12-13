@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from "@/lib/utils";
 import axios from "axios"
 import { useState } from "react"
 
@@ -26,7 +27,7 @@ const MarketingPage = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit}  className="block w-[200px]">
       <input
         type="text"
         name="userMessage"
@@ -37,9 +38,10 @@ const MarketingPage = () => {
       <button type="submit">Send</button>
 
       {chatHistory.map((message: any, index: number) => (
-  <div key={index}>
-    {message.role === 'user' ? 'User: ' : 'Assistant: '}
+  <div key={index} className={cn("rounded-md border-red-500 border justify-center font-medium flex items-start gap-x-3 py-4 w-full", message.role === "user" && "justify-end")}>
+    <div className={cn(message.role === "user" ? "text-[14px] bg-[#b2d7f7] " : "text-[14px] bg-[#b2d7f7]")}>
     {message.content}
+    </div>
   </div>
 ))}
     </form>

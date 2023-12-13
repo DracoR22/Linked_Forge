@@ -5,9 +5,9 @@ import sendMail from '@/lib/emails/nodemailer'
 
 export async function POST(req: Request) {
    try {
-    const { email, userName, hashedPassword } = await req.json()
+    const { email, name, hashedPassword } = await req.json()
 
-    if(!email || !userName || !hashedPassword) {
+    if(!email || !name || !hashedPassword) {
         return new NextResponse('Missing Info', { status: 400 })
     }
 
@@ -21,12 +21,12 @@ export async function POST(req: Request) {
         return new NextResponse('Email is already taken', { status: 401 });
     }
 
-    const user = { userName, email, hashedPassword}
+    const user = { name, email, hashedPassword}
 
     const activationToken = createActivationToken(user)
     const activationCode = activationToken.activationCode
 
-    const data = { userName, activationCode }
+    const data = { name, activationCode }
 
     try {
         await sendMail({

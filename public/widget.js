@@ -1,36 +1,4 @@
-const sendMessageToChat = async (messages) => {
-    try {
-        // Assuming your API endpoint for chat is "/api/chat"
-        const apiUrl = 'http://localhost:3000/api/chat';
-
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // Add any authentication headers if needed
-            },
-            body: JSON.stringify({ messages }),
-        });
-
-        if (!response.ok) {
-            // Handle non-successful response
-            console.error('Error:', response.statusText);
-            return null; // Or throw an error if you prefer
-        }
-
-        const result = await response.json();
-        console.log('Response from chat API:', result);
-        return result;
-    } catch (error) {
-        console.error('Error sending message to chat:', error);
-        return null; // Or throw an error if you prefer
-    }
-};
-
 const createWidget = async () => {
-    
-    // Call the function to send messages to the chat API
-    // const chatResponse = await sendMessageToChat(messages);
 
     // Get the script tag
     const scriptTag = document.querySelector('script[data-ai-id]');
@@ -45,31 +13,47 @@ const createWidget = async () => {
     // STYLES
     Object.assign(widgetContainer.style, {
       position: 'fixed',
-      bottom: '0',
-      left: '0',
-      margin: '10px',
+      bottom: '75px',
+      right: '30px',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
   });
     
     // STYLES
     const buttonStyles = {
-      color: '#6574cd',
+      color: '#00000',
       fontSize: '1.5rem',
-      backgroundColor: '#ff0000',
+      backgroundColor: '#000000',
+      position: 'absolute',
+      right: '0',
       borderRadius: '9999px',
-      padding: '1.5rem 1.5rem',
+      padding: '1.7rem 1.7rem',
       border: 'none',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      transitionProperty: 'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter',
+      transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      transitionDuration: '500ms',
     };
 
     const bodyStyles = {
-        backgroundColor: '#ff0000',
+        backgroundColor: '#FFFFFF',
         width: '350px',
         height: '400px',
         display: "none",
         flexDirection: 'column',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
         marginBottom: '20px',
+        borderRadius: '10px'
+    }
+
+    const inputStyles = {
+        width: '320px',
+        height: '40px',
+        display: 'flex',
+        marginLeft: '5px',
+        marginRight: '5px',
+        border: 'none',
+        outline: 'none',
+        paddingLeft: '6px'
     }
 
     const body = document.createElement('div');
@@ -79,73 +63,164 @@ const createWidget = async () => {
     Object.assign(button.style, buttonStyles);
 
     const title = document.createElement('h3');
-    title.textContent = 'Widget Title';
-    title.style.color = '#fff';
+    title.textContent = 'Chat Support';
+    title.style.marginLeft = '20px'
+    title.style.fontSize = '20px'
+    title.style.width = '100%'
+    title.style.fontWeight = '500'
+    title.style.paddingTop = '10px'
+    title.style.paddingBottom = '10px'
 
     const scrollableContent = document.createElement('div');
     scrollableContent.style.overflowY = 'scroll';
     scrollableContent.style.overflowX = 'hidden';
     scrollableContent.style.flexGrow = 1;
-    scrollableContent.style.backgroundColor = '#FFFFFF'
+    scrollableContent.style.display = 'block';
+    scrollableContent.style.backgroundColor = '#d9d9d9'
 
     const form = document.createElement('form');
+    form.style.backgroundColor = '#FFFFFF'
+    // form.style.height = '60px'
+    form.style.marginTop = '7px'
+    form.style.marginBottom = '7px'
+    
 
     const input = document.createElement('input');
     input.type = 'text';
-    input.placeholder = 'Type your message...';
-    input.id = 'userResponse';
-    input.name = 'userResponse';
+    input.placeholder = 'Type your question here...';
+    input.id = 'userMessage';
+    input.name = 'userMessage';
+    Object.assign(input.style, inputStyles)
 
-    // let userResponse = '';
-    let conversationHistory = [];
+    const brand = document.createElement('p');
+    brand.textContent = 'Powered by Linked Forge'
+    brand.style.display = 'flex'
+    brand.style.alignItems = 'flex-center'
+    brand.style.justifyContent = 'center'
+    brand.style.fontSize = '10px'
+    brand.style.color = '#666666'
+    brand.style.fontWeight = '600'
+
+    const oppeningText = document.createElement('div')
+    oppeningText.textContent = 'Hi, I am your AI assistant, ask me anything!'
+    oppeningText.style.backgroundColor = '#ffffff';
+    oppeningText.style.marginTop = '12px'
+    oppeningText.style.width = 'fit-content'
+
+    oppeningText.style.marginLeft = '10px'
+    oppeningText.style.marginBottom = '10px';
+    oppeningText.style.borderRadius = '8px';
+    oppeningText.style.padding = '8px';
+    oppeningText.style.fontSize = '14px'
+
+    let userMessage = '';
+    let chatHistory = [];
 
 
     // Event listeners
     button.addEventListener('click', () => {
         body.style.display = body.style.display === 'none' ? 'flex' : 'none';
+        button.style.borderRadius = '20px';
       });
 
-    // input.addEventListener('input', (e) => {
-    //     userResponse = e.target.value;
-    //   });
+      button.addEventListener('mouseenter', function () {
+        if (body.style.display !== 'flex') {
+          button.style.borderRadius = '20px';
+        }
+      });
+
+      button.addEventListener('mouseleave', function () {
+        if (body.style.display !== 'flex') {
+          button.style.borderRadius = '9999px';
+        }
+      });
+
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
       
-        const userMessage = [{role: 'system', content: "You are a helpful assistant."}, {role: 'user', content: input.value} ];
-      
-        try {
-            // Make the request and get the response
-            const chatResponse = await sendMessageToChat(userMessage);
-        
-            input.value = '';
-    
-            // Add the user's message and the assistant's response to the conversation history
-            conversationHistory.push(userMessage, chatResponse);
-    
-            // Display the entire conversation history
-            displayConversation();
-        } catch (error) {
-            // Handle any errors that might occur during the request
-            console.error('Error sending message:', error);
-        }
+       // Get user input
+      userMessage = input.value;
+
+      chatHistory.push({ role: 'user', content: userMessage });
+
+      input.value = ''
+
+      // Update the UI immediately
+      updateChatHistory();
+
+      try {
+        // API call
+        const response = await fetch('http://localhost:3000/api/chat', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userMessage }),
+          });
+  
+          const responseData = await response.json();
+
+        // Get assistant response
+        const assistantResponse = responseData.content;
+
+        // Update chat history
+        chatHistory.push({ role: 'assistant', content: assistantResponse });
+
+        // Clear user message input
+        userMessage = '';
+
+        // Update the UI
+        updateChatHistory();
+
+        document.getElementById('userMessage').value = '';
+      } catch (error) {
+        console.error('API request failed', error);
+      }
     });
+
+    function updateChatHistory() {
+      
+        scrollableContent.innerHTML = '';
+  
+        chatHistory.forEach((message, index) => {
+          const messageContainer = document.createElement('div')
+          const messageElement = document.createElement('div')
+          messageContainer.style.width = "100%"
+          messageContainer.style.display = "flex"
+          messageContainer.style.paddingTop = '12px'
+
+          messageElement.style.alignItems = 'start';
+          messageElement.style.marginLeft = '10px'
+          messageElement.style.marginRight = '10px'
+          messageElement.style.marginBottom = '4px';
+          messageElement.style.borderRadius = '8px';
+          messageElement.style.padding = '8px';
+          messageElement.style.fontSize = '14px'
+
+          if (message.role === 'user') {
+            messageContainer.style.justifyContent = 'flex-end'; 
+            messageElement.style.backgroundColor = '#1e90ff';
+            messageElement.style.color = '#ffffff'
+
+          } else {
+            messageElement.style.backgroundColor = '#ffffff';
+          }
+
+          messageElement.innerHTML = `${message.content}`;
+          messageContainer.appendChild(messageElement)
+          scrollableContent.appendChild(messageContainer);
+
+        });
+      }
     
-    const messageElement = document.createElement('div');
-    messageElement.textContent = 'hola';
-    messageElement.style.position = 'absolute';
-    messageElement.style.top = '80px';
-    messageElement.style.left = '10px';
-    messageElement.style.padding = '8px';
-    messageElement.style.borderRadius = '8px';
-   
-    
-    scrollableContent.appendChild(messageElement);
-        
+    scrollableContent.appendChild(oppeningText)
+
     // Append inside of the body
     body.appendChild(title);
     body.appendChild(scrollableContent);
     body.appendChild(form)
+    body.appendChild(brand)
 
     form.appendChild(input)
   
@@ -160,5 +235,8 @@ const createWidget = async () => {
   };
   
   // Call createWidget to dynamically create and append the widget container
-  createWidget();
+  document.addEventListener('DOMContentLoaded', function() {
+    createWidget();
+  });
+  
   

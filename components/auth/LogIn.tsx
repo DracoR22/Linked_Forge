@@ -4,20 +4,21 @@ import { useState } from "react"
 import { FcGoogle } from "react-icons/fc"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
-import axios from "axios"
-import RegisterFormSchema from "@/lib/validations/register"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { Label } from "@/components/ui/label"
 import ErrorInput from "@/components/ui/error-input"
 import { Button } from "@/components/ui/button"
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import LoginFormSchema from "@/lib/validations/login"
-import { z } from "zod"
+
+
 
 const LogIn = () => {
 
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const { data: session } = useSession();
+
  
   const {register, handleSubmit, formState: {errors}} = useForm<FieldValues>({
     resolver: zodResolver(LoginFormSchema),
@@ -48,10 +49,30 @@ const LogIn = () => {
       }
     });
   }
+
+  const socialAuth = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      await signIn('google');
+      
+      // Check for session after sign-in
+     
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (session) {
+    // Redirect only after successful sign-in
+    redirect('/dashboard');
+  }
+
+
   return (
     <div className="grid lg:grid-cols-2">
       <form onSubmit={handleSubmit(onSubmit)}className="mx-12">
-        <h1 className="text-3xl font-medium pt-10">
+        <h1 className="text-3xl font-semibold pt-10">
           Log In
         </h1>
         <div className="pt-[27px]">
@@ -84,8 +105,8 @@ const LogIn = () => {
           <hr className="flex-grow border-t border-neutral-400" />
         </div>
 
-             <Button onClick={(e) => { e.preventDefault() }} 
-              className="w-full bg-neutral-900 text-white hover:bg-[#101010]">
+             <Button onClick={socialAuth} 
+              className="w-full bg-white text-black border hover:bg-neutral-200">
                Continue with Google 
                <span className="ml-3">
                <FcGoogle />

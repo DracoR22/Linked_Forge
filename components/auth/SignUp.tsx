@@ -19,7 +19,7 @@ const SignUp = () => {
   const {register, handleSubmit, formState: {errors}} = useForm<FieldValues>({
      resolver: zodResolver(RegisterFormSchema),
      defaultValues: {
-         userName: '', email: '', hashedPassword: ''
+         name: '', email: '', hashedPassword: ''
      }
   })
 
@@ -45,10 +45,10 @@ const SignUp = () => {
         <div className="pt-[27px]">
           {/* USERNAME */}
         <Label className="uppercase font-bold">
-          Username
+          Name
         </Label>
          <div className="py-3">
-           <ErrorInput id='userName' label='UserName' disabled={isLoading} register={register} errors={errors} required/>
+           <ErrorInput id='name' label='Name' disabled={isLoading} register={register} errors={errors} required/>
          </div>
           {/* EMAIL */}
          <Label className="uppercase font-bold">
@@ -67,7 +67,7 @@ const SignUp = () => {
 
          {/* SUBMIT */}
          <div className="flex justify-center items-center w-full py-1">
-            <Button className="w-full rounded-md py-7" variant="purple">
+            <Button type="submit" className="w-full rounded-md py-7" variant="purple">
               Sign Up
             </Button>
          </div>

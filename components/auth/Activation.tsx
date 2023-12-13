@@ -22,7 +22,7 @@ const Activation = () => {
 
   return (
     <div>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="mt-10">
         <Input id="code" name="code" onChange={(e) => setCode(e.target.value)}/>
         <button type="submit">Submit</button>
         </form>

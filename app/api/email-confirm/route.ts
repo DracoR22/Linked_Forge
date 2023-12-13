@@ -17,7 +17,7 @@ export async function POST (req: Request) {
         return new NextResponse('Invalid activation code', { status: 400 });
     }
 
-    const { userName, email, hashedPassword } = newUser.user
+    const { name, email, hashedPassword } = newUser.user
 
     if (!email || !hashedPassword) {
         return new NextResponse('Email is required', { status: 400 });
@@ -37,7 +37,7 @@ export async function POST (req: Request) {
 
     const user = await db.user.create({
      data: {
-        userName,
+        name,
         email,
         hashedPassword: hashPassword
      }
