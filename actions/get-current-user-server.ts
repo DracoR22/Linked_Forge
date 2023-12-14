@@ -2,7 +2,7 @@ import db from "@/lib/db"
 import getSession from "./get-session"
 
 
-const getCurrentUserMiddleware = async () => {
+const getCurrentUserServer = async () => {
     try {
         const session = await getSession()
 
@@ -10,7 +10,7 @@ const getCurrentUserMiddleware = async () => {
             return null
         }
 
-        const currentUserMiddleware = await db.user.findUnique({
+        const currentUserServer = await db.user.findUnique({
             where: {
             email: session.user.email as string
             },
@@ -19,19 +19,20 @@ const getCurrentUserMiddleware = async () => {
                 assistants: {
                     select: {
                         id: true,
+                        name: true
                     }
                 }
             },
         })
 
-        if(!currentUserMiddleware) {
+        if(!currentUserServer) {
             return null
         }
 
-        return currentUserMiddleware
+        return currentUserServer
     } catch (error: any) {
         return null
     }
 }
 
-export default getCurrentUserMiddleware
+export default getCurrentUserServer

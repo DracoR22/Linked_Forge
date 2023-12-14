@@ -47,8 +47,8 @@ model Account {
 model Assistant {
   id String @id @default(uuid()) @map("_id") 
   name String
-  title String
-  instructions String
+  title String?
+  instructions String?
 
   userId String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

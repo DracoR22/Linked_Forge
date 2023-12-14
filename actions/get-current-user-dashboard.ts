@@ -1,7 +1,6 @@
 import db from "@/lib/db"
 import getSession from "./get-session"
 
-
 const getCurrentUserDashboard = async () => {
     try {
         const session = await getSession()
