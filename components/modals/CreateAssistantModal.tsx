@@ -24,6 +24,9 @@ const CreateAssistantModal = () => {
         await axios.post('/api/assistant', { name })
         createAssistantModal.onClose()
         router.refresh()
+        toast({
+          title: 'Your assistant has been created'
+        })
     } catch (error: any) {
         if (error.response) {
             const errorMessage = error.response.data || 'An error occurred';

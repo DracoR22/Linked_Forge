@@ -1,23 +1,24 @@
 import getCurrentUserDashboard from "@/actions/get-current-user-dashboard"
+import NavItem from "@/components/dashboard/NavItem"
 import Navbar from "@/components/dashboard/Navbar"
 import Sidebar from "@/components/dashboard/Sidebar"
 import { ModalProvider } from "@/components/providers/ModalProvider"
 import { Toaster } from "@/components/ui/toaster"
+import { Suspense } from "react"
 
 const PlatformLayout = async ({ children }: { children: React.ReactNode }) => {
 
-  const currentUser = await getCurrentUserDashboard()
+  const currentUserDashboard = await getCurrentUserDashboard();
 
     return (
       <main className="h-full">
         
          <ModalProvider/>
-         <Toaster/>
-         <Navbar currentUser={currentUser}/>
+         <Navbar currentUser={currentUserDashboard}/>
          <div className="pt-20 md:pt-24 px-6 max-w-6xl 2xl:max-w-screen-xl">
             <div className="flex gap-x-7">
                 <div className="w-64 shrink-0 hidden md:block">
-                  <Sidebar currentUser={currentUser}/>
+                  <Sidebar currentUser={currentUserDashboard}/>
                 </div>
               {children}
             </div>

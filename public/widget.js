@@ -56,6 +56,8 @@ const createWidget = async () => {
         paddingLeft: '6px'
     }
 
+    let statusText = 'Online'
+
     const body = document.createElement('div');
     Object.assign(body.style, bodyStyles)
   
@@ -69,7 +71,16 @@ const createWidget = async () => {
     title.style.width = '100%'
     title.style.fontWeight = '500'
     title.style.paddingTop = '10px'
-    title.style.paddingBottom = '10px'
+ 
+
+    const status = document.createElement('p');
+    status.textContent = statusText
+    status.style.fontSize = '10px'
+    status.style.marginLeft = '20px'
+    status.style.marginTop = '-10px'
+    status.style.paddingBottom = '5px'
+    status.style.color = '#666666'
+    status.style.fontWeight = '700'
 
     const scrollableContent = document.createElement('div');
     scrollableContent.style.overflowY = 'scroll';
@@ -151,12 +162,14 @@ const createWidget = async () => {
 
       try {
         // API call
+        statusText = 'Typing...'
+        status.textContent = statusText
         const response = await fetch('http://localhost:3000/api/chat', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userMessage }),
+            body: JSON.stringify({ userMessage, assistantId: aiId }),
           });
   
           const responseData = await response.json();
@@ -176,6 +189,9 @@ const createWidget = async () => {
         document.getElementById('userMessage').value = '';
       } catch (error) {
         console.error('API request failed', error);
+      } finally {
+        statusText = 'Online';
+        status.textContent = statusText;
       }
     });
 
@@ -197,6 +213,7 @@ const createWidget = async () => {
           messageElement.style.borderRadius = '8px';
           messageElement.style.padding = '8px';
           messageElement.style.fontSize = '14px'
+          messageElement.style.maxWidth = '300px'
 
           if (message.role === 'user') {
             messageContainer.style.justifyContent = 'flex-end'; 
@@ -218,6 +235,7 @@ const createWidget = async () => {
 
     // Append inside of the body
     body.appendChild(title);
+    body.appendChild(status)
     body.appendChild(scrollableContent);
     body.appendChild(form)
     body.appendChild(brand)

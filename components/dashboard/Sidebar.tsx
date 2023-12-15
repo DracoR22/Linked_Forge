@@ -9,6 +9,8 @@ import { useCreateAssistantModal } from "@/hooks/use-create-assistant-modal"
 import { Accordion } from "../ui/accordion"
 import { useLocalStorage } from "usehooks-ts"
 import NavItem from "./NavItem"
+import { useEffect, useState } from "react"
+import { Skeleton } from "../ui/skeleton"
 
 interface SidebarProps {
   storageKey?: string
@@ -21,6 +23,31 @@ const Sidebar = ({ storageKey = "c-sidebar-state", currentUser }: SidebarProps) 
   const createAssistantModal = useCreateAssistantModal()
 
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(storageKey, {})
+  // const [isMounted, setIsMounted] = useState(false)
+
+  // useEffect(() => {
+  //   setIsMounted(true)
+  // }, [])
+
+  // if(!isMounted) {
+  //   return null
+  // }
+
+  if (!currentUser) {
+    return (
+      <>
+        <div className="flex items-center justify-between mb-2">
+          <Skeleton className="h-10 w-[50%]" />
+          <Skeleton className="h-10 w-10" />
+        </div>
+        <div className="space-y-2">
+          <NavItem.Skeleton />
+          <NavItem.Skeleton />
+          <NavItem.Skeleton />
+        </div>
+      </>
+    );
+  }
 
   const defaultAccordionValue: string[] = Object.keys(expanded).reduce((acc: string[], key: string) => {
     if (expanded[key]) {

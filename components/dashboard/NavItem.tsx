@@ -7,6 +7,7 @@ import { AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordi
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { Button } from "../ui/button"
+import { Skeleton } from "../ui/skeleton"
 
 interface Assistant {
     id: string
@@ -30,25 +31,21 @@ const NavItem = ({ isExpanded, assistant, onExpand, isActive }: NavItemProps) =>
             label: 'Overview',
             href: `/dashboard/${assistant.id}`,
             icon: <Layout className="h-4 w-4 mr-2"/>,
-            active: pathname === `/dashboard/${assistant.id}`
         },
         {
             label: 'Messages',
             href: `/dashboard/${assistant.id}/messages`,
             icon: <Mail className="h-4 w-4 mr-2"/>,
-            active: pathname === `/dashboard/${assistant.id}/messages`
         },
         {
-            label: 'Customize',
-            href: `/dashboard/${assistant.id}/customize`,
+            label: 'Custom',
+            href: `/dashboard/${assistant.id}/custom`,
             icon: <PenSquare className="h-4 w-4 mr-2"/>,
-            active: pathname === `/dashboard/${assistant.id}/customize`
         },
         {
             label: 'Settings',
             href: `/dashboard/${assistant.id}/settings`,
             icon: <Settings className="h-4 w-4 mr-2"/>,
-            active: pathname === `/dashboard/${assistant.id}/settings`
         },
         
     ], [pathname])
@@ -71,7 +68,7 @@ const NavItem = ({ isExpanded, assistant, onExpand, isActive }: NavItemProps) =>
       </AccordionTrigger>
       <AccordionContent className="pt-1 text-nutral-700">
          {routes.map((route) => (
-            <Button key={route.href} onClick={() => onClick(route.href)} className={cn("w-full font-normal justify-start pl-10 mb-1", pathname === route.href && "bg-indigo-500/10 text-indigo-700")} variant="ghost">
+            <Button key={route.href} onClick={() => onClick(route.href)} className={cn("w-full font-normal justify-start pl-10 mb-1 hover:bg-indigo-500/10 hover:text-indigo-700", pathname === route.href && "bg-indigo-500/10 text-indigo-700")} variant="ghost">
                 {route.icon}
                 {route.label}
             </Button>
@@ -80,5 +77,16 @@ const NavItem = ({ isExpanded, assistant, onExpand, isActive }: NavItemProps) =>
     </AccordionItem>
   )
 }
+
+NavItem.Skeleton = function SkeletonNavItem() {
+    return (
+      <div className="flex items-center gap-x-2">
+        <div className="w-10 h-10 relative shrink-0">
+          <Skeleton className="h-full w-full absolute"/>
+        </div>
+        <Skeleton className="h-10 w-full"/>
+      </div>
+    )
+  }
 
 export default NavItem

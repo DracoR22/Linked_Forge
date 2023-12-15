@@ -4,20 +4,25 @@ import { useState } from "react"
 import { FcGoogle } from "react-icons/fc"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
-import { redirect, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { Label } from "@/components/ui/label"
 import ErrorInput from "@/components/ui/error-input"
 import { Button } from "@/components/ui/button"
 import { signIn, useSession } from 'next-auth/react'
 import LoginFormSchema from "@/lib/validations/login"
+import { useToast } from "../ui/use-toast"
+import { LoaderButton } from "../ui/loader-button"
 
 
 
 const LogIn = () => {
 
   const [isLoading, setIsLoading] = useState(false)
+
   const router = useRouter()
   const { data: session } = useSession();
+
+  const { toast } = useToast()
 
  
   const {register, handleSubmit, formState: {errors}} = useForm<FieldValues>({
@@ -35,17 +40,20 @@ const LogIn = () => {
       redirect: false,
     })
     .then((callback) => {
-      setIsLoading(false);
 
-      if (callback?.ok) {
+      if (callback?.ok && !callback?.error) {
         // TOAST
         router.refresh();
-        router.push("/")
+        setIsLoading(false);
+        router.push('/dashboard')
       }
       
       if (callback?.error) {
-       // TOAST
-       alert("invalid email or password")
+       toast({
+        variant: 'destructive',
+        title: callback.error
+       })
+       setIsLoading(false);
       }
     });
   }
@@ -54,19 +62,17 @@ const LogIn = () => {
     e.preventDefault();
 
     try {
-      await signIn('google');
+      await signIn('google', { callbackUrl: '/dashboard '});
       
-      // Check for session after sign-in
-     
     } catch (error) {
       console.error(error);
     }
   };
 
-  if (session) {
-    // Redirect only after successful sign-in
-    redirect('/dashboard');
-  }
+  // if (session) {
+  //   // Redirect only after successful sign-in
+  //   redirect('/dashboard');
+  // }
 
 
   return (
@@ -93,9 +99,9 @@ const LogIn = () => {
 
          {/* SUBMIT */}
          <div className="flex justify-center items-center w-full py-1">
-            <Button className="w-full rounded-md py-7" variant="purple">
+            <LoaderButton isLoading={isLoading} className="w-full rounded-md py-7" variant="purple">
               Login
-            </Button>
+            </LoaderButton>
          </div>
 
          {/* SOCIAL LOGIN */}
@@ -126,7 +132,7 @@ const LogIn = () => {
                 Dont&apos; have an account yet?
               </h3>
               <div className="flex justify-center">
-              <Button onClick={() => router.push("/sign-ip")}
+              <Button onClick={() => router.push("/sign-up")}
                className="py-[20px] px-6 bg-transparent hover:bg-indigo-600 border rounded-full border-white">
                 Sign Up
               </Button>
