@@ -4,7 +4,11 @@ import { NextResponse } from "next/server";
 
 export async function PATCH (req: Request, { params }: { params: { assistantId: string }}) {
     try {
-        const { instructions } = await req.json()
+        const values = await req.json()
+
+        if (!values) {
+            return new NextResponse('Fields required', { status: 400 })
+        }
 
         const currentUser = await getCurrentUserServer()
 
@@ -18,7 +22,7 @@ export async function PATCH (req: Request, { params }: { params: { assistantId: 
                 userId: currentUser.id
             },
             data: {
-              instructions
+              ...values
             }
         })
 

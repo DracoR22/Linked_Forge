@@ -15,7 +15,7 @@ const PlatformLayout = async ({ children }: { children: React.ReactNode }) => {
         
          <ModalProvider/>
          <Navbar currentUser={currentUserDashboard}/>
-         <div className="pt-20 md:pt-24 px-6 max-w-6xl 2xl:max-w-screen-xl">
+         <div className="pt-20 md:pt-24 px-6 xl:mx-[100px]">
             <div className="flex gap-x-7">
                 <div className="w-64 shrink-0 hidden md:block">
                   <Sidebar currentUser={currentUserDashboard}/>

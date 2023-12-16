@@ -13,8 +13,6 @@ import LoginFormSchema from "@/lib/validations/login"
 import { useToast } from "../ui/use-toast"
 import { LoaderButton } from "../ui/loader-button"
 
-
-
 const LogIn = () => {
 
   const [isLoading, setIsLoading] = useState(false)

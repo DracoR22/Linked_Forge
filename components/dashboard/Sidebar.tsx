@@ -11,6 +11,7 @@ import { useLocalStorage } from "usehooks-ts"
 import NavItem from "./NavItem"
 import { useEffect, useState } from "react"
 import { Skeleton } from "../ui/skeleton"
+import Hint from "../Hint"
 
 interface SidebarProps {
   storageKey?: string
@@ -77,13 +78,15 @@ const Sidebar = ({ storageKey = "c-sidebar-state", currentUser }: SidebarProps) 
     </div>
      <Separator/>
     <div className="font-medium text-xs flex items-center my-1">
-       <span className="pl-4">
+       <span className="pl-4 flex-1">
             Assistants
         </span>
 
-        <Button onClick={() => createAssistantModal.onOpen()} type="button" size="icon" variant="ghost" className="ml-auto">
+        <Hint sideOffset={20} side="top" description={`Create a new assistant`}>
+           <div onClick={() => createAssistantModal.onOpen()} className="ml-auto hover:bg-indigo-500/10 p-3 rounded-md">
               <Plus className="h-4 w-4"/>
-        </Button>
+           </div>
+        </Hint>
     </div>
 
     <Accordion type="multiple" defaultValue={defaultAccordionValue} className="space-y-2">

@@ -16,7 +16,7 @@ export async function POST(req: Request) {
             email,
         },
         select: {
-            email
+            email: true
         }
     });
 
