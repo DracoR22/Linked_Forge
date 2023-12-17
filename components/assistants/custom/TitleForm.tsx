@@ -113,7 +113,7 @@ const TitleForm = ({ initialData, assistantId }: TitleFormProps) => {
             <FormItem>
                 <FormControl>
                     <Input className="focus-visible:ring-indigo-500 focus-visible:ring-offset-0"
-                     disabled={isSubmitting} placeholder="e.g 'Advanced web development'" {...field}/>
+                     disabled={isSubmitting} placeholder="e.g 'Chat Support'" {...field}/>
                 </FormControl>
                 <FormMessage/>
             </FormItem>

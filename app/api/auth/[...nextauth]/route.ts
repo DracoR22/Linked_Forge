@@ -8,6 +8,9 @@ import db from '@/lib/db'
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(db),
+    pages: {
+        signIn: '/log-in'
+    },
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,

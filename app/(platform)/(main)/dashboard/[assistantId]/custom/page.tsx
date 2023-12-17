@@ -1,8 +1,10 @@
 import getUserAssistantIdCustom from "@/actions/get-user-assistant-id-custom"
 
 import Info from "@/components/assistants/Info"
+import ImageForm from "@/components/assistants/custom/ImageForm"
 import InstructionsForm from "@/components/assistants/custom/InstructionsForm"
 import NameForm from "@/components/assistants/custom/NameForm"
+import PlaceholderForm from "@/components/assistants/custom/PlaceholderForm"
 import TitleForm from "@/components/assistants/custom/TitleForm"
 import { Separator } from "@/components/ui/separator"
 
@@ -17,7 +19,9 @@ const CustomPage = async ({ params } : { params: { assistantId: string } }) => {
   const requiredFields = [
     assistant.name,
     assistant.title,
-    assistant.instructions
+    assistant.image,
+    assistant.instructions,
+    assistant.placeholder
   ]
 
   const totalFields = requiredFields.length;
@@ -27,7 +31,7 @@ const CustomPage = async ({ params } : { params: { assistantId: string } }) => {
   const isComplete = requiredFields.every(Boolean)
 
   return (
-    <div className="w-full">
+    <div className="w-full mb-4">
       <Info assistant={assistant}/>
       <Separator className="my-2"/>
 
@@ -46,6 +50,7 @@ const CustomPage = async ({ params } : { params: { assistantId: string } }) => {
         <div>
           <NameForm initialData={assistant} assistantId={assistant.id}/>
           <TitleForm initialData={assistant} assistantId={assistant.id}/>
+          <ImageForm initialData={assistant} assistantId={assistant.id}/>
         </div>
         <div className="space-y-6">
             <div>
@@ -58,7 +63,7 @@ const CustomPage = async ({ params } : { params: { assistantId: string } }) => {
                    Sell your course
                  </h2> */}
               </div>
-              {/* <PriceForm initialData={course} courseId={course.id}/> */}
+              <PlaceholderForm initialData={assistant} assistantId={assistant.id}/>
             </div>
             <div>
               

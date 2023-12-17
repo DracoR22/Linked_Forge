@@ -1,12 +1,15 @@
 import LogIn from "@/components/auth/LogIn"
-import { getSession } from "next-auth/react"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 
 
 const LoginPage = async () => {
 
-  const session = await getSession()
+  const session = await getServerSession()
 
-  console.log(session?.user)
+  if (session) {
+    redirect('/dashboard')
+  }
 
   return (
     <div>

@@ -25,7 +25,6 @@ interface InstructionsFormProps {
 
 const InstructionsForm = ({ initialData, assistantId }: InstructionsFormProps) => {
 
-   
     const router = useRouter()
     const { toast } = useToast()
 
@@ -105,7 +104,7 @@ const InstructionsForm = ({ initialData, assistantId }: InstructionsFormProps) =
     </Button>
   </div>
   {!isEditing && (
-        <p className={cn(`text-sm mt-2 text-neutral-600`, !initialData.title && "text-slate-500 italic")}>
+        <p className={cn(`text-sm mt-2 text-neutral-600`, !initialData.instructions && "text-slate-500 italic")}>
           {initialData.instructions || "No instructions"}
         </p>
       )}

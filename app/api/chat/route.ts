@@ -37,16 +37,16 @@ export async function POST (req: Request) {
         return new NextResponse('Assistant not found', { status: 401 })
       }
 
-     const chatHistory: any = []
+    //  const chatHistory: any = []
   
-      const messages = chatHistory.map(([role, content]: any) => ({ role, content }))
+    //   const messages = chatHistory.map(([role, content]: any) => ({ role, content }))
   
-      messages.push({ role: "system", content: `
-      ONLY generate plain sentences without prefix of ${assistant.name}. DO NOT use any prefix. 
-      ${assistant.instructions}
-      Below are relevant details about your role. Only give consice answers, that means never give questions as answers.
-      Everytime that you dont know an answer respond the following: 'Im sorry i cant answer that question'` },
-      { role: "user", content: userMessage })
+     const messages: any = [{ role: "system", content: `ONLY generate plain sentences without prefix of ${assistant.name}. DO NOT use any prefix. 
+     ${assistant.instructions}
+     Below are relevant details about your role. Only give consice answers, that means never give questions as answers.
+     Also you can only answer questions based on your role details.
+     Everytime that you dont know an answer respond the following: 'Im sorry i cant answer that question'` },
+     { role: "user", content: userMessage }]
     
       const completion = await openai.chat.completions.create({
         messages: messages, 
@@ -54,8 +54,7 @@ export async function POST (req: Request) {
       });
   
       // Update history with user input and assistant response
-      chatHistory.push("user", userMessage)
-      chatHistory.push("assistant", completion.choices[0])
+     
 
       return NextResponse.json(completion.choices[0].message, { headers: corsHeaders });
     } catch (error) {

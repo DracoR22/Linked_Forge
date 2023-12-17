@@ -12,6 +12,7 @@ import NavItem from "./NavItem"
 import { useEffect, useState } from "react"
 import { Skeleton } from "../ui/skeleton"
 import Hint from "../Hint"
+import { useSession } from "next-auth/react"
 
 interface SidebarProps {
   storageKey?: string
@@ -20,31 +21,31 @@ interface SidebarProps {
 
 const Sidebar = ({ storageKey = "c-sidebar-state", currentUser }: SidebarProps) => {
 
+  const { data: session, status } = useSession()
+
   const pathname = usePathname()
   const createAssistantModal = useCreateAssistantModal()
 
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(storageKey, {})
-  // const [isMounted, setIsMounted] = useState(false)
 
-  // useEffect(() => {
-  //   setIsMounted(true)
-  // }, [])
-
-  // if(!isMounted) {
-  //   return null
-  // }
-
-  if (!currentUser) {
+  if (status === 'loading') {
     return (
       <>
+       <div className="flex items-center justify-between mb-2">
+          <Skeleton className="h-10 w-[50%]" />
+          <Skeleton className="h-10 w-10" />
+        </div>
         <div className="flex items-center justify-between mb-2">
           <Skeleton className="h-10 w-[50%]" />
           <Skeleton className="h-10 w-10" />
         </div>
         <div className="space-y-2">
-          <NavItem.Skeleton />
-          <NavItem.Skeleton />
-          <NavItem.Skeleton />
+          <NavItem.Skeleton/>
+          <NavItem.Skeleton/>
+          <NavItem.Skeleton/>
+          <NavItem.Skeleton/>
+          <NavItem.Skeleton/>
+          <NavItem.Skeleton/>
         </div>
       </>
     );

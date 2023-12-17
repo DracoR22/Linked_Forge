@@ -116,7 +116,7 @@ const NameForm = ({ initialData, assistantId }: NameFormProps) => {
                 <FormItem>
                     <FormControl>
                         <Input className="focus-visible:ring-indigo-500 focus-visible:ring-offset-0"
-                         disabled={isSubmitting} placeholder="e.g 'Advanced web development'" {...field}/>
+                         disabled={isSubmitting} placeholder="e.g 'AI Assistant" {...field}/>
                     </FormControl>
                     <FormMessage/>
                 </FormItem>

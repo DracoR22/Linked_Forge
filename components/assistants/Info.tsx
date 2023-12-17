@@ -11,7 +11,7 @@ const Info = ({ assistant }: InfoProps) => {
   return (
     <div className="flex items-center gap-x-4">
         <div className="w-[60px] h-[60px] relative">
-          <Image fill src={'/linkedforge.svg'} alt="Assistant image" className="rounded-md object-cover"/>
+          <Image fill src={assistant?.image?.url ? assistant?.image?.url : '/linkedforge.svg'} alt="Assistant image" className="rounded-md object-cover"/>
         </div>
         <div className="space-y-1">
             <p className="font-semibold text-xl">

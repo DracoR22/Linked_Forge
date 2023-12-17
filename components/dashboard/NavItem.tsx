@@ -12,6 +12,7 @@ import { Skeleton } from "../ui/skeleton"
 interface Assistant {
     id: string
     name: string
+    image: any
 }
 
 interface NavItemProps {
@@ -59,7 +60,7 @@ const NavItem = ({ isExpanded, assistant, onExpand, isActive }: NavItemProps) =>
       <AccordionTrigger onClick={() => onExpand(assistant.id)} className={cn("flex items-center gap-x-2 p-1.5 text-neutral-700 rounded-md hover:bg-neutral-500/10 transition text-start no-underline hover:no-underline", isActive && !isExpanded && "bg-indigo-500/10 text-indigo-700")}>
         <div className="flex items-center gap-x-2">
            <div className="w-7 h-7 relative">
-           <Image fill src={'/linkedforge.svg'} alt="Organization" className="rounded-sm object-cover"/>
+           <Image fill src={assistant?.image?.url || '/linkedforge.svg'} alt="Organization" className="rounded-sm object-cover"/>
            </div>
            <span className="font-medium text-sm">
                 {assistant.name}

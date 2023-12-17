@@ -11,33 +11,33 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid()) @map("_id") 
-  name String?
-  email String? @unique
-  emailVerified DateTime?
-  image String?
+  id             String       @id @default(uuid()) @map("_id") 
+  name           String?
+  email          String?      @unique
+  emailVerified  DateTime?
+  image          String?
   hashedPassword String?
 
-  accounts Account[]
-  assistants Assistant[]
+  accounts       Account[]
+  assistants     Assistant[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
 
 model Account {
-  id String @id @default(uuid()) @map("_id") 
-  userId String 
-  type String
-  provider String
+  id                String @id @default(uuid()) @map("_id") 
+  userId            String 
+  type              String
+  provider          String
   providerAccountId String
-  refresh_token String? @db.String
-  access_token String? @db.String
-  expires_at Int?
-  token_type String?
-  scope String?
-  id_token String? @db.String
-  session_state String?
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([provider, providerAccountId])
@@ -49,6 +49,9 @@ model Assistant {
   name String
   title String?
   instructions String?
+  placeholder String?
+
+  image Image?
 
   userId String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -57,4 +60,13 @@ model Assistant {
   updatedAt DateTime @updatedAt
 
   @@index([userId])
+}
+
+model Image {
+  id String @id @default(uuid()) @map("_id") 
+  url String
+  publicId String
+
+  assistantId String @unique
+  assistant Assistant @relation(fields: [assistantId], references: [id], onDelete: Cascade)
 }

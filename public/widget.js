@@ -1,3 +1,4 @@
+
 const createWidget = async () => {
 
     // Get the script tag
@@ -9,6 +10,13 @@ const createWidget = async () => {
     // Create a new container element
     const widgetContainer = document.createElement('div');
     widgetContainer.id = `widget-container-${aiId}`; // Use the AI ID for uniqueness
+
+    // FETCH ASSISTANT DATA
+    const assistantResponse = await fetch(`http://localhost:3000/api/public-assistant/${aiId}`, {
+      method: 'GET'
+    });
+
+    const assistant = await assistantResponse.json();
   
     // STYLES
     Object.assign(widgetContainer.style, {
@@ -65,7 +73,7 @@ const createWidget = async () => {
     Object.assign(button.style, buttonStyles);
 
     const title = document.createElement('h3');
-    title.textContent = 'Chat Support';
+    title.textContent = assistant.title  ? assistant.title : 'Chat Support';
     title.style.marginLeft = '20px'
     title.style.fontSize = '20px'
     title.style.width = '100%'
@@ -112,17 +120,19 @@ const createWidget = async () => {
     brand.style.color = '#666666'
     brand.style.fontWeight = '600'
 
-    const oppeningText = document.createElement('div')
-    oppeningText.textContent = 'Hi, I am your AI assistant, ask me anything!'
-    oppeningText.style.backgroundColor = '#ffffff';
-    oppeningText.style.marginTop = '12px'
-    oppeningText.style.width = 'fit-content'
+    const openingText = document.createElement('div')
+    openingText.textContent = 'Hi, I am your AI assistant, ask me anything!'
+    openingText.style.backgroundColor = '#ffffff';
+    openingText.style.marginTop = '12px'
+    openingText.style.width = 'fit-content'
 
-    oppeningText.style.marginLeft = '10px'
-    oppeningText.style.marginBottom = '10px';
-    oppeningText.style.borderRadius = '8px';
-    oppeningText.style.padding = '8px';
-    oppeningText.style.fontSize = '14px'
+    openingText.style.marginLeft = '10px'
+    openingText.style.marginBottom = '10px';
+    openingText.style.borderRadius = '8px';
+    openingText.style.padding = '8px';
+    openingText.style.fontSize = '14px'
+
+    scrollableContent.appendChild(openingText)
 
     let userMessage = '';
     let chatHistory = [];
@@ -198,13 +208,17 @@ const createWidget = async () => {
     function updateChatHistory() {
       
         scrollableContent.innerHTML = '';
+
+        scrollableContent.appendChild(openingText);
   
         chatHistory.forEach((message, index) => {
-          const messageContainer = document.createElement('div')
+          
           const messageElement = document.createElement('div')
+          const messageContainer = document.createElement('div')
           messageContainer.style.width = "100%"
           messageContainer.style.display = "flex"
-          messageContainer.style.paddingTop = '12px'
+          messageContainer.style.paddingTop = '10px'
+         
 
           messageElement.style.alignItems = 'start';
           messageElement.style.marginLeft = '10px'
@@ -226,13 +240,11 @@ const createWidget = async () => {
 
           messageElement.innerHTML = `${message.content}`;
           messageContainer.appendChild(messageElement)
+          
           scrollableContent.appendChild(messageContainer);
-
         });
       }
     
-    scrollableContent.appendChild(oppeningText)
-
     // Append inside of the body
     body.appendChild(title);
     body.appendChild(status)

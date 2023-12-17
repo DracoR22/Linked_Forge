@@ -2,10 +2,10 @@ import db from "@/lib/db"
 import getCurrentUserServer from "./get-current-user-server"
 
 interface IParams {
-    assistantId?: string
+    assistantId: string
 }
 
-const getUserAssistantIdCustom = async (params: IParams) => {
+const getUserAssistantIdHeader = async (params: IParams) => {
   const { assistantId } = params
   const currentUser = await getCurrentUserServer()
 
@@ -19,12 +19,8 @@ const getUserAssistantIdCustom = async (params: IParams) => {
         userId: currentUser.id
     },
     select: {
-        id: true,
         name: true,
-        title: true,
-        instructions: true,
-        image: true,
-        placeholder: true
+        image: true
     }
   })
 
@@ -35,4 +31,4 @@ const getUserAssistantIdCustom = async (params: IParams) => {
   return assistant
 }
 
-export default getUserAssistantIdCustom 
+export default getUserAssistantIdHeader
