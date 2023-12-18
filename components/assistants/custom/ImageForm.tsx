@@ -27,6 +27,7 @@ const ImageForm = ({ initialData, assistantId }: ImageFormProps) => {
     const [isEditing, setIsEditing] = useState(false)
     const [image, setImage] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(false)
+    const [isloadingDelete, setIsLoadingDelete] = useState(false)
 
      // UPLOAD IMAGE
      const handleFileInputChange = (e: any) => {
@@ -63,8 +64,8 @@ const ImageForm = ({ initialData, assistantId }: ImageFormProps) => {
           return
         }
 
+        setIsLoading(true)
         try {
-          setIsLoading(true)
           await axios.post(`/api/assistant/${assistantId}/image`, { image })
           toast({
             title: 'Image uploaded!'
@@ -87,6 +88,8 @@ const ImageForm = ({ initialData, assistantId }: ImageFormProps) => {
           return
          }
 
+         setIsLoadingDelete(true)
+
          try {
           await axios.delete(`/api/assistant/${assistantId}/image`)
           toast({
@@ -101,6 +104,8 @@ const ImageForm = ({ initialData, assistantId }: ImageFormProps) => {
               variant: 'destructive',
               title: errorMessage
           })
+         } finally {
+          setIsLoadingDelete(false)
          }
       }
 
@@ -117,7 +122,7 @@ const ImageForm = ({ initialData, assistantId }: ImageFormProps) => {
      </div>
   <div className="font-semibold flex items-center justify-between">
     Assistant image
-    <Button variant="ghost" onClick={toggleEdit} className="text-semibold">
+    <LoaderButton isLoading={isloadingDelete} variant="ghost" onClick={toggleEdit} className="text-semibold">
         {isEditing ? (
             <>
               Cancel
@@ -128,7 +133,7 @@ const ImageForm = ({ initialData, assistantId }: ImageFormProps) => {
              Edit image
             </>
          )}
-    </Button>
+    </LoaderButton>
   </div>
   {!isEditing && (
         !initialData.image ? (
@@ -146,13 +151,13 @@ const ImageForm = ({ initialData, assistantId }: ImageFormProps) => {
 
        {image && !initialData.image && (
         <div className="flex group relative items-center justify-center h-60 bg-indigo-500/20 rounded-md">
-             <div className="absolute top-2 right-2" onClick={() => setImage('')}>
-             <div className="opacity-0 group-hover:opacity-100 transition-transform 
+             <button disabled={isLoading} className="absolute top-2 right-2" onClick={() => setImage('')}>
+             <div className={cn(`opacity-0 group-hover:opacity-100 transition-transform 
              cursor-pointer p-2 text-white bg-neutral-900/20
-             rounded-full" >
+             rounded-full`, isLoading && "cursor-default")} >
                <X/>
              </div>
-          </div>
+          </button>
          <Image width={500} height={500} src={image} alt="image" className="h-full w-full object-cover"/>
        </div>
        )}
@@ -173,20 +178,20 @@ const ImageForm = ({ initialData, assistantId }: ImageFormProps) => {
 
        {initialData.image && (
         <div className="relative flex items-center justify-center group h-60 bg-indigo-500/20 rounded-md">
-          <div className="absolute top-2 right-2" onClick={handleDelete}>
-             <div className="opacity-0 group-hover:opacity-100 transition-transform 
+          <button disabled={isloadingDelete} className="absolute top-2 right-2" onClick={handleDelete}>
+             <div className={cn(`opacity-0 group-hover:opacity-100 transition-transform 
              cursor-pointer p-2 text-white bg-neutral-900/20
-             rounded-full" >
+             rounded-full`, isloadingDelete && 'cursor-default')}>
                <X/>
              </div>
-          </div>
+          </button>
         <Image width={500} height={500} src={initialData?.image?.url} alt="image" className="h-full w-full object-cover"/>
         </div>
        )}
 
        <div className="mt-4 flex items-center gap-x-2">
-        <LoaderButton isLoading={isLoading} onClick={handleSubmit} type="submit" variant="purple"
-        className={cn(image === null && "cursor-default bg-indigo-500/70 hover:bg-indigo-500/70")}>
+        <LoaderButton disabled={isLoading || isloadingDelete} isLoading={isLoading} onClick={handleSubmit} type="submit" variant="purple"
+        className={cn(image === null || !image || isloadingDelete  && "cursor-default bg-indigo-500/70 hover:bg-indigo-500/70")}>
           Save
        </LoaderButton>
       </div>

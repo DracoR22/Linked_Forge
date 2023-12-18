@@ -20,7 +20,8 @@ export async function GET (req: Request, { params }: { params: { assistantId: st
                 id: params.assistantId
             },
             select: {
-                title: true
+                title: true,
+                placeholder: true
             }
         })
 

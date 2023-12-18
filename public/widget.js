@@ -1,6 +1,18 @@
+let sessionId = sessionStorage.getItem('sessionId');
+
+const generateSessionId = () =>  {
+
+  return Math.random().toString(36).substring(2, 19);
+}
+
+if (!sessionId) {
+  sessionId = generateSessionId();
+
+  sessionStorage.setItem('sessionId', sessionId);
+}
 
 const createWidget = async () => {
-
+// console.log(sessionId)
     // Get the script tag
     const scriptTag = document.querySelector('script[data-ai-id]');
   
@@ -121,13 +133,15 @@ const createWidget = async () => {
     brand.style.fontWeight = '600'
 
     const openingText = document.createElement('div')
-    openingText.textContent = 'Hi, I am your AI assistant, ask me anything!'
+    openingText.textContent = assistant.placeholder ? assistant.placeholder : 'Hi, I am your AI assistant, ask me anything!'
     openingText.style.backgroundColor = '#ffffff';
     openingText.style.marginTop = '12px'
     openingText.style.width = 'fit-content'
+    openingText.style.maxWidth = '200px'
 
     openingText.style.marginLeft = '10px'
-    openingText.style.marginBottom = '10px';
+    openingText.style.marginRight = '10px'
+    openingText.style.marginBottom = '4px';
     openingText.style.borderRadius = '8px';
     openingText.style.padding = '8px';
     openingText.style.fontSize = '14px'
@@ -179,7 +193,7 @@ const createWidget = async () => {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userMessage, assistantId: aiId }),
+            body: JSON.stringify({ userMessage, assistantId: aiId, sessionId }),
           });
   
           const responseData = await response.json();
@@ -227,7 +241,7 @@ const createWidget = async () => {
           messageElement.style.borderRadius = '8px';
           messageElement.style.padding = '8px';
           messageElement.style.fontSize = '14px'
-          messageElement.style.maxWidth = '300px'
+          messageElement.style.maxWidth = '200px'
 
           if (message.role === 'user') {
             messageContainer.style.justifyContent = 'flex-end'; 

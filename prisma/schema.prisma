@@ -45,28 +45,44 @@ model Account {
 }
 
 model Assistant {
-  id String @id @default(uuid()) @map("_id") 
-  name String
-  title String?
+  id           String @id @default(uuid()) @map("_id") 
+  name         String
+  title        String?
   instructions String?
-  placeholder String?
+  placeholder  String?
 
-  image Image?
+  image        Image?
+  messages     Message[]
 
-  userId String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  user         User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@index([userId])
 }
 
 model Image {
-  id String @id @default(uuid()) @map("_id") 
-  url String
-  publicId String
+  id          String    @id @default(uuid()) @map("_id") 
+  url         String
+  publicId    String
 
-  assistantId String @unique
-  assistant Assistant @relation(fields: [assistantId], references: [id], onDelete: Cascade)
+  assistantId String    @unique
+  assistant   Assistant @relation(fields: [assistantId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id               String    @id @default(uuid()) @map("_id") 
+  userMessage      String
+  assistantMessage String
+  sessionToken     String
+
+  assistantId      String
+  assistant        Assistant @relation(fields: [assistantId], references: [id], onDelete: Cascade)
+
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@index([assistantId])
 }

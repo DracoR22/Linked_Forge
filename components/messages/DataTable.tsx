@@ -1,0 +1,126 @@
+'use client'
+
+import * as React from "react"
+import { ColumnDef, ColumnFiltersState, SortingState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Input } from "../ui/input"
+import { Button } from "../ui/button"
+import { RefreshCw } from "lucide-react"
+import { useRouter } from "next/navigation"
+import Hint from "../Hint"
+import { cn } from "@/lib/utils"
+import { useSession } from "next-auth/react"
+
+interface DataTableProps<TData, TValue> {
+    columns: ColumnDef<TData, TValue>[]
+    data: TData[]
+  }
+  
+  export function DataTable<TData, TValue>({
+    columns,
+    data,
+  }: DataTableProps<TData, TValue>) {
+    const [sorting, setSorting] = React.useState<SortingState>([])
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+    const table = useReactTable({
+      data,
+      columns,
+      getCoreRowModel: getCoreRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
+      onSortingChange: setSorting,
+      getSortedRowModel: getSortedRowModel(),
+      onColumnFiltersChange: setColumnFilters,
+      getFilteredRowModel: getFilteredRowModel(),
+      state: {
+        sorting,
+        columnFilters,
+      },
+    })
+
+    const { status } = useSession()
+
+    const router = useRouter()
+
+    const [isRefreshing, setIsRefreshing] = React.useState(false)
+
+    const onRefresh = () => {
+        setIsRefreshing(true);
+
+        setTimeout(() => {
+          router.refresh();
+          setIsRefreshing(false); // Move it here to execute after the timeout
+        }, 1000);
+    }
+
+    if (status === 'loading') {
+      return <div>loading</div>
+    }
+  
+    return (
+      <div>
+          <div className="flex items-center py-4 justify-between">
+          <Input placeholder="Filter messages..." value={(table.getColumn("userMessage")?.getFilterValue() as string) ?? ""}
+            onChange={(event) => table.getColumn("userMessage")?.setFilterValue(event.target.value)} className="max-w-sm focus-visible:ring-indigo-500 focus-visible:ring-offset-0" />
+
+           <Hint sideOffset={15} description={`Refresh Table`}>
+            <div className={"p-4 hover:bg-neutral-100 rounded-md transition"} onClick={onRefresh}>
+              <RefreshCw className={cn("h-4 w-4", isRefreshing && "animate-spin")} />
+            </div>
+            </Hint>
+         
+         </div>
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  )
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={columns.length} className="h-24 text-center text-neutral-600">
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="flex items-center justify-end space-x-2 py-4">
+          <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+            Previous
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+            Next
+          </Button>
+        </div>
+      </div>
+    )
+  }

@@ -20,7 +20,7 @@ const Custom = () => {
   return (
     <div>
       <textarea id="instructions" name="instructions" value={instructions} onChange={(e) => setInstructions(e.target.value)}/>
-      <button onClick={onSubmit}>Submit</button>
+      <button className="max-w-sm" onClick={onSubmit}>Submit</button>
     </div>
   )
 }
