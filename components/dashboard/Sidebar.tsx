@@ -2,7 +2,7 @@
 
 import { LayoutDashboard, Plus } from "lucide-react"
 import { Button } from "../ui/button"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Separator } from "../ui/separator"
 import { useCreateAssistantModal } from "@/hooks/use-create-assistant-modal"
@@ -25,6 +25,8 @@ const Sidebar = ({ storageKey = "c-sidebar-state", currentUser }: SidebarProps) 
 
   const pathname = usePathname()
   const createAssistantModal = useCreateAssistantModal()
+
+  const router = useRouter()
 
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(storageKey, {})
 
@@ -68,9 +70,11 @@ const Sidebar = ({ storageKey = "c-sidebar-state", currentUser }: SidebarProps) 
  
   return (
     <>
-    <div className={cn("font-medium cursor-pointer text-xs flex items-center -mt-6 mb-1 hover:bg-indigo-500/10 rounded-sm transition")}> 
+    <div onClick={() => router.push('/dashboard')}
+     className={cn("font-medium cursor-pointer text-xs flex items-center -mt-6 mb-1 hover:bg-indigo-500/10 rounded-sm transition",
+     pathname === '/dashboard' && "bg-indigo-500/10")}> 
        <span className="pl-4">
-            Dashboard
+            Overview
         </span>
 
         <Button type="button" size="icon" variant="none" className="ml-auto">

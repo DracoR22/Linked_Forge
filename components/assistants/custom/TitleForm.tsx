@@ -80,7 +80,7 @@ const TitleForm = ({ initialData, assistantId }: TitleFormProps) => {
      useEventListener("keydown", onKeyDown)
 
   return (
-    <div ref={formRef} className="mt-6 border bg-indigo-500/20 rounded-md p-4">
+    <div ref={formRef} className="mt-6 border bg-indigo-500/10 rounded-md p-4">
     <div className="flex justify-end -mt-2 pb-1">
     <Hint sideOffset={40} description={`This will be the text that appears at the top of your widget`}>
        <HelpCircle className=" h-[14px] w-[14px]"/>

@@ -101,7 +101,7 @@ export async function DELETE (req: Request, { params }: { params: { assistantId:
             return new NextResponse('Image not found for the assistant', { status: 404 });
         }
     } catch (error) {
-        console.error('ASSISTANT_DELETE_IMAGE_', error);
+        console.error('ASSISTANT_DELETE_IMAGE', error);
         return new NextResponse('Internal Error', { status: 500 })
     }
 }

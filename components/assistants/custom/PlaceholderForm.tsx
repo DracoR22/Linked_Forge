@@ -80,7 +80,7 @@ const PlaceholderForm = ({ initialData, assistantId }: PlaceHolderFormProps) => 
    useEventListener("keydown", onKeyDown)
 
   return (
-    <div ref={formRef} className="border bg-indigo-500/20 rounded-md p-4">
+    <div ref={formRef} className="border bg-indigo-500/10 rounded-md p-4">
     <div className="flex justify-end -mt-2 pb-1">
     <Hint sideOffset={40} description={`This will be the welcome text of your assistant chat`}>
        <HelpCircle className=" h-[14px] w-[14px]"/>

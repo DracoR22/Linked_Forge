@@ -82,7 +82,7 @@ const InstructionsForm = ({ initialData, assistantId }: InstructionsFormProps) =
 
 
   return (
-    <div ref={formRef} className="border bg-indigo-500/20 rounded-md p-4">
+    <div ref={formRef} className="border bg-indigo-500/10 rounded-md p-4">
     <div className="flex justify-end -mt-2 pb-1">
     <Hint sideOffset={40} description={`Give your assistant all the information it needs to provide accurate answers to each question. The more context you give, the better your assistant responses will be`}>
        <HelpCircle className=" h-[14px] w-[14px]"/>

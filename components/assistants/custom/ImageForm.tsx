@@ -114,14 +114,14 @@ const ImageForm = ({ initialData, assistantId }: ImageFormProps) => {
      useEventListener("keydown", onKeyDown)
 
   return (
-    <div ref={formRef} className="mt-6 border bg-indigo-500/20 rounded-md p-4">
+    <div ref={formRef} className="mt-6 border bg-indigo-500/10 rounded-md p-4">
     <div className="flex justify-end -mt-2 pb-1">
     <Hint sideOffset={40} description={`Give your assistant an avatar picture to look more unique!`}>
        <HelpCircle className=" h-[14px] w-[14px]"/>
      </Hint>
      </div>
   <div className="font-semibold flex items-center justify-between">
-    Assistant image
+    Assistant avatar
     <LoaderButton isLoading={isloadingDelete} variant="ghost" onClick={toggleEdit} className="text-semibold">
         {isEditing ? (
             <>
@@ -130,7 +130,7 @@ const ImageForm = ({ initialData, assistantId }: ImageFormProps) => {
         ) : (
             <>
             <Pencil className="h-4 w-4 mr-2"/>
-             Edit image
+             Edit avatar
             </>
          )}
     </LoaderButton>

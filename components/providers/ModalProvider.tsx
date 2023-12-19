@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import CreateAssistantModal from "../modals/CreateAssistantModal"
+import DeleteMessageModal from "../modals/DeleteMessageModal"
 
 
 export const ModalProvider = () => {
@@ -19,6 +20,7 @@ export const ModalProvider = () => {
     return (
         <>
           <CreateAssistantModal/>
+          <DeleteMessageModal/>
         </>
     )
 }

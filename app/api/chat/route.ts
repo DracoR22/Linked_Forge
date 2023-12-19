@@ -1,5 +1,4 @@
 import db from "@/lib/db";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
@@ -71,8 +70,6 @@ export async function POST (req: Request) {
         messages: messages, 
         model: "gpt-3.5-turbo",
       });
-  
-      // Update history with user input and assistant response
 
       if (!completion.choices[0].message.content) {
         return new NextResponse('No response from Assistant', { status: 400 })
