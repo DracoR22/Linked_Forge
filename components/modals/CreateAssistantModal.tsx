@@ -8,6 +8,7 @@ import { LoaderButton } from "../ui/loader-button"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useToast } from "../ui/use-toast"
+import { cn } from "@/lib/utils"
 
 const CreateAssistantModal = () => {
 
@@ -18,14 +19,19 @@ const CreateAssistantModal = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [name, setName] = useState('')
 
-  const onSubmit = async () =>{
+  const onSubmit = async () => {
+    if (!name || name === '') {
+      return
+    }
     try {
         setIsLoading(true)
         await axios.post('/api/assistant', { name })
         createAssistantModal.onClose()
+        setName('')
         router.refresh()
         toast({
-          title: 'Your assistant has been created'
+          title: 'Your assistant has been created!',
+          description: 'Now you can customize it from the Custom page'
         })
     } catch (error: any) {
         if (error.response) {

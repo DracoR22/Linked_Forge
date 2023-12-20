@@ -15,7 +15,7 @@ const Settings = () => {
               See the script to use your assistant in your website
             </p>
             </div>
-            <Button variant='purple' className="mt-2 text-sm" size={'sm'}>
+            <Button variant='purple' className="mt-2 text-sm" >
               See code
             </Button>
         </div>
@@ -29,7 +29,7 @@ const Settings = () => {
                 Delete your assistant forever
              </p>
             </div>
-            <Button variant='destructive' className="mt-2 text-sm" size={'sm'}>
+            <Button variant='destructive' className="mt-2 text-sm" >
                Delete
             </Button>
         </div>

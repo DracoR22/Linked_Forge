@@ -31,10 +31,7 @@ const CustomPage = async ({ params } : { params: { assistantId: string } }) => {
   const isComplete = requiredFields.every(Boolean)
 
   return (
-    <div className="w-full mb-4">
-      <Info assistant={assistant}/>
-      <Separator className="my-2"/>
-
+    <section className="mb-4">
       <div className="flex items-center justify-between mt-6">
          <div className="flex flex-col gap-y-2">
            <h1 className="text-2xl font-medium">
@@ -71,7 +68,7 @@ const CustomPage = async ({ params } : { params: { assistantId: string } }) => {
             </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

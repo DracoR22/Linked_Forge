@@ -6,12 +6,8 @@ import { Separator } from "@/components/ui/separator"
 
 const SettingsPage = async ({ params } : { params: { assistantId: string } }) => {
 
-  const assistant = await getUserAssistantIdMessages(params)
-
   return (
     <div className="w-full mb-4">
-       <Info assistant={assistant}/>
-       <Separator className="my-2"/>
 
        <div className="flex items-center justify-between mt-6">
          <div className="flex flex-col gap-y-2">

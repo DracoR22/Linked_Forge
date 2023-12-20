@@ -8,15 +8,10 @@ import getAssistantMessages from "@/actions/get-assistant-messages"
 
 const MessagesPage = async ({ params } : { params: { assistantId: string } }) => {
 
-   const assistant = await getUserAssistantIdMessages(params)
-
    const messages = await getAssistantMessages(params)
 
   return (
-    <div className="w-full mb-4">
-      <Info assistant={assistant}/>
-      <Separator className="my-2"/>
-
+    <div className=" mb-4">
       <div className="flex items-center justify-between mt-6">
          <div className="flex flex-col gap-y-2">
            <h1 className="text-2xl font-medium">

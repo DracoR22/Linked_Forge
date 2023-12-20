@@ -37,6 +37,10 @@ export async function POST (req: Request) {
         return new NextResponse('Assistant not found', { status: 401 })
       }
 
+      if (!assistant.instructions) {
+        return new NextResponse('Assistant needs instructions before start using it', { status: 400 })
+      }
+
     const history = await db.message.findMany({
       where: {
         assistantId,

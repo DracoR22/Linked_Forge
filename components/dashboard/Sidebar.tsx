@@ -74,7 +74,7 @@ const Sidebar = ({ storageKey = "c-sidebar-state", currentUser }: SidebarProps) 
      className={cn("font-medium cursor-pointer text-xs flex items-center -mt-6 mb-1 hover:bg-indigo-500/10 rounded-sm transition",
      pathname === '/dashboard' && "bg-indigo-500/10")}> 
        <span className="pl-4">
-            Overview
+            Dashboard
         </span>
 
         <Button type="button" size="icon" variant="none" className="ml-auto">
