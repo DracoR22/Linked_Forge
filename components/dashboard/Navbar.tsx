@@ -3,6 +3,9 @@
 import { useSession } from "next-auth/react"
 import Image from "next/image"
 import { Skeleton } from "../ui/skeleton"
+import Link from "next/link"
+import { Button } from "../ui/button"
+import SubscriptionButton from "../SubscriptionButton"
 
 const Navbar = ({ currentUser }: any) => {
 
@@ -24,11 +27,13 @@ const Navbar = ({ currentUser }: any) => {
   }
 
   return (
-    <nav className="fixed z-50 top-0 px-10 w-full h-14 border-b shadow-sm bg-white flex items-center">
+    <nav className="fixed z-50 top-0 px-10 w-full  border-b shadow-sm bg-white flex items-center">
       <div className="flex items-center gap-x-4">
-        <div className="hidden md:flex">
-           LOGO
-        </div>
+        <Link href={'/dashboard'} className="hidden md:flex my-2 cursor-pointer">
+           <Image src={'/ultimate.svg'} alt="LinkedForgeAi" width={500} height={500} className="w-[50px] rounded-full"/>
+        </Link>
+
+            <SubscriptionButton isPro={false}/>
             {/* <Button size="sm" className="rounded-sm hidden md:block h-auto py-1.5 px-2" variant="purple">
               Create
             </Button>

@@ -2,9 +2,23 @@ import getUserAssistantIdMessages from "@/actions/get-user-assistant-id-messages
 import Info from "@/components/assistants/Info"
 import Settings from "@/components/assistants/settings/Settings"
 import { Separator } from "@/components/ui/separator"
+import db from "@/lib/db"
 
 
 const SettingsPage = async ({ params } : { params: { assistantId: string } }) => {
+
+  const assistant = await db.assistant.findUnique({
+    where: {
+      id: params.assistantId
+    },
+    select: {
+      instructions: true
+    }
+  })
+
+  if (!assistant) {
+    return null
+  }
 
   return (
     <div className="w-full mb-4">
@@ -21,7 +35,7 @@ const SettingsPage = async ({ params } : { params: { assistantId: string } }) =>
       </div>
 
       <div className="mt-6">
-         <Settings/>
+         <Settings instructions={assistant.instructions}/>
       </div>
     </div>
   )

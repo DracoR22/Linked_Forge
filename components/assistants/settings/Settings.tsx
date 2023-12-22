@@ -1,9 +1,20 @@
 'use client'
 
+import LinkButton from "@/components/LinkButton"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import useLinkAssistantModal from "@/hooks/use-link-assistant-modal"
+import { useParams } from "next/navigation"
 
-const Settings = () => {
+interface SettingsProps {
+  instructions?: string | null
+}
+
+const Settings = ({ instructions }: SettingsProps) => {
+
+  const { onOpen } = useLinkAssistantModal()
+  const params = useParams()
+
   return (
     <div>
         <div className="mb-4 flex items-center">
@@ -15,9 +26,7 @@ const Settings = () => {
               See the script to use your assistant in your website
             </p>
             </div>
-            <Button variant='purple' className="mt-2 text-sm" >
-              See code
-            </Button>
+            <LinkButton instructions={instructions}/>
         </div>
          <Separator className="my-2"/>
         <div className="mt-4 flex items-center">

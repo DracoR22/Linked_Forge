@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "cockroachdb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id             String       @id @default(uuid()) @map("_id") 
+  id             String       @id @default(uuid()) 
   name           String?
   email          String?      @unique
   emailVerified  DateTime?
@@ -20,13 +20,14 @@ model User {
 
   accounts       Account[]
   assistants     Assistant[]
+  userSubscription UserSubscription?
 
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 }
 
 model Account {
-  id                String @id @default(uuid()) @map("_id") 
+  id                String @id @default(uuid()) 
   userId            String 
   type              String
   provider          String
@@ -45,7 +46,7 @@ model Account {
 }
 
 model Assistant {
-  id           String @id @default(uuid()) @map("_id") 
+  id           String @id @default(uuid()) 
   name         String
   title        String?
   instructions String?
@@ -64,7 +65,7 @@ model Assistant {
 }
 
 model Image {
-  id          String    @id @default(uuid()) @map("_id") 
+  id          String    @id @default(uuid())  
   url         String
   publicId    String
 
@@ -73,7 +74,7 @@ model Image {
 }
 
 model Message {
-  id               String    @id @default(uuid()) @map("_id") 
+  id               String    @id @default(uuid())  
   userMessage      String
   assistantMessage String
   sessionToken     String
@@ -85,4 +86,15 @@ model Message {
   updatedAt        DateTime  @updatedAt
 
   @@index([assistantId])
+}
+
+model UserSubscription {
+  id                     String    @id @default(uuid()) 
+  stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
+  stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
+  stripePriceId          String?   @map(name: "stripe_price_id")
+  stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
+
+  userId                 String    @unique
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

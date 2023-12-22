@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react"
 import CreateAssistantModal from "../modals/CreateAssistantModal"
 import DeleteMessageModal from "../modals/DeleteMessageModal"
+import LinkAssistantModal from "../modals/LinkAssistantModal"
+import ProModal from "../modals/ProModal"
 
 
 export const ModalProvider = () => {
@@ -21,6 +23,8 @@ export const ModalProvider = () => {
         <>
           <CreateAssistantModal/>
           <DeleteMessageModal/>
+          <LinkAssistantModal/>
+          <ProModal/>
         </>
     )
 }

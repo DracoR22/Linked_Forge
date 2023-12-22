@@ -18,7 +18,7 @@ const bannerVariants = cva(
   );
   
   interface BannerProps extends VariantProps<typeof bannerVariants> {
-    children: React.ReactNode;
+    description: string;
   };
   
   const iconMap = {
@@ -26,14 +26,14 @@ const bannerVariants = cva(
     success: CheckCircleIcon,
   };
 
-const Banner = ({children, variant}: BannerProps) => {
+const Banner = ({description, variant}: BannerProps) => {
 
   const Icon = iconMap[variant || "warning"];
 
   return (
     <div className={cn(bannerVariants({ variant }))}>
       <Icon className="h-4 w-4 mr-2" />
-      {children}
+      {description}
     </div>
   )
 }

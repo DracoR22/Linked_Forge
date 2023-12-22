@@ -65,7 +65,8 @@ const InstructionsForm = ({ initialData, assistantId }: InstructionsFormProps) =
             toggleEdit()
             router.refresh()
             toast({
-                title: `New instructions added!`
+                title: `New instructions added!`,
+                description: 'Go to the Overview page to link your assistant'
             })
         } catch (error: any) {
             const errorMessage = error.response.data || 'An error occurred';

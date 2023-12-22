@@ -6,9 +6,10 @@ import Hint from "../Hint"
 
 interface MessagesCountProps {
     messages: number
+    isPro: boolean
 }
 
-const MessagesCount = ({ messages }: MessagesCountProps) => {
+const MessagesCount = ({ messages, isPro }: MessagesCountProps) => {
   return (
     <Card>
         <CardHeader className="flex flex-row justify-between space-y-0 pb-2">
@@ -23,7 +24,7 @@ const MessagesCount = ({ messages }: MessagesCountProps) => {
         </CardHeader>
         <CardContent>
             <div className="text-2xl font-bold text-indigo-500">
-              +{messages} / 50
+            {isPro ? `+${messages} / 10k` : `+${messages} / 50`}
             </div>
         </CardContent>
     </Card>

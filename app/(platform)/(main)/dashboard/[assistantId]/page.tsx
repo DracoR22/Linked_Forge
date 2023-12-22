@@ -2,10 +2,12 @@ import { getAssistantMessagesCount } from "@/actions/get-assistant-messages-coun
 import { getMonthlyMessageCountForAssistant } from "@/actions/get-assistant-messages-this-month"
 import { getConversationsCountForAssistant } from "@/actions/get-conversations-count-assistant"
 import { getGraphMessagesAssistant } from "@/actions/get-graph-messages-assistant"
+import LinkButton from "@/components/LinkButton"
 import AssistantConversations from "@/components/assistants/overview/AssistantConversations"
 import AssistantMessages from "@/components/assistants/overview/AssistantMessages"
 import AssistantMessagesMonth from "@/components/assistants/overview/AssistantMessagesMonth"
 import AssistantOverview from "@/components/assistants/overview/AssistantOverview"
+import { Button } from "@/components/ui/button"
 import db from "@/lib/db"
 
 
@@ -16,9 +18,14 @@ const AssistantIdPage = async ({ params } : { params: { assistantId: string } })
       id: params.assistantId
     },
     select: {
-      name: true
+      name: true,
+      instructions: true
     }
   })
+
+  if (!assistant) {
+    return null
+  }
 
   const messagesCount = await getAssistantMessagesCount(params.assistantId)
   const conversationsCount = await getConversationsCountForAssistant(params.assistantId)
@@ -27,7 +34,10 @@ const AssistantIdPage = async ({ params } : { params: { assistantId: string } })
  
   return (
     <section className="mb-6">
-       <div>
+        <div className="hidden md:flex justify-end">
+           <LinkButton instructions={assistant.instructions}/>
+         </div>
+       <div className="-mt-[50px]">
          <h1 className="font-medium text-2xl mt-6">
             Assistant Overview
          </h1>

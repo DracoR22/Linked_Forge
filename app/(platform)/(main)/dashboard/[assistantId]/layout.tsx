@@ -10,19 +10,9 @@ const PlatformLayout = async ({ children, params }: { children: React.ReactNode;
   
       return (
         <main className="w-full">
-          <div className="mb-4 -mt-6">
+          <div className="mb-4 md:-mt-6">
             {!assistant?.instructions && (
-              <Banner>
-              <p>
-                 Your assistant need instructions before start using it
-              </p>
-              <div className="flex-1"/>
-              <button className="flex justify-end ml-2 rounded-lg hover:bg-indigo-500/10 border border-black transition p-2">
-                <Link href={`/dashboard/${params.assistantId}/custom`}>
-                  Give instructions
-                </Link>
-              </button>
-           </Banner>
+              <Banner description="Your assistant need instructions before you can start using it. Go to the 'Custom' page to add new instructions"/>
             )}
           </div>
              <Info assistant={assistant}/>

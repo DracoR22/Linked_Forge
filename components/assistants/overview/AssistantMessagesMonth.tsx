@@ -23,7 +23,7 @@ const AssistantMessagesMonth = ({ messages }: AssistantMessagesMonthProps) => {
     </CardHeader>
     <CardContent>
         <div className="text-2xl font-bold text-indigo-500">
-          {messages} / 50
+          {messages}
           {/* {messages >= 4 && <div>'you ran out of messages!'</div>} */}
         </div>
     </CardContent>
