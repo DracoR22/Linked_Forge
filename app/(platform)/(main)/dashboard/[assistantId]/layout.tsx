@@ -2,11 +2,12 @@ import getUserAssistantHeader from "@/actions/get-user-assistant-header";
 import Banner from "@/components/Banner";
 import Info from "@/components/assistants/Info";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
+import { checkSubscription } from "@/lib/subscription";
 
 const PlatformLayout = async ({ children, params }: { children: React.ReactNode; params: {assistantId: string} }) => {
 
     const assistant = await getUserAssistantHeader(params)
+    // const isPro = await checkSubscription()
   
       return (
         <main className="w-full">

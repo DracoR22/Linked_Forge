@@ -1,6 +1,7 @@
 import getCurrentUserDashboard from "@/actions/get-current-user-dashboard";
 import getCurrentUserServer from "@/actions/get-current-user-server";
 import db from "@/lib/db";
+import { checkSubscription } from "@/lib/subscription";
 import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
@@ -12,8 +13,19 @@ export async function POST(req: Request) {
         }
 
         const currentUser = await getCurrentUserServer()
+
         if(!currentUser) {
             return new NextResponse('Unauthorized', { status: 401 })
+        }
+
+        const isPro = await checkSubscription()
+
+        if (!isPro && currentUser.assistants.length >= 1) {
+            return new NextResponse('Assistant limit reached. Upgrade to Pro account for more assistants', { status: 403 })
+        }
+
+        if (isPro && currentUser.assistants.length >= 7) {
+            return new NextResponse('You have reached the maximum number of assistants', { status: 403 })
         }
 
         const existingAssistant = await db.user.findFirst({

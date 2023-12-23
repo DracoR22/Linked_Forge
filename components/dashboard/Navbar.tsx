@@ -7,7 +7,12 @@ import Link from "next/link"
 import { Button } from "../ui/button"
 import SubscriptionButton from "../SubscriptionButton"
 
-const Navbar = ({ currentUser }: any) => {
+interface NavbarProps {
+  currentUser: any
+  isPro: boolean
+}
+
+const Navbar = ({ currentUser, isPro }: NavbarProps) => {
 
   const { data: session, status } = useSession()
 
@@ -32,15 +37,12 @@ const Navbar = ({ currentUser }: any) => {
         <Link href={'/dashboard'} className="hidden md:flex my-2 cursor-pointer">
            <Image src={'/ultimate.svg'} alt="LinkedForgeAi" width={500} height={500} className="w-[50px] rounded-full"/>
         </Link>
+            {!isPro && <SubscriptionButton isPro={isPro}/>}
+            
 
-            <SubscriptionButton isPro={false}/>
-            {/* <Button size="sm" className="rounded-sm hidden md:block h-auto py-1.5 px-2" variant="purple">
-              Create
-            </Button>
-
-            <Button size="sm" className="rounded-sm block md:hidden" variant="purple">
+            {/* <Button size="sm" className="rounded-sm block md:hidden" variant="purple">
               <Plus className="h-4 w-4"/>
-            </Button> */}
+            </Button>  */}
       </div>
       <div className="ml-auto flex items-center gap-x-2">
         <Image className="rounded-full object-cover" height={40} width={40} alt="Avatar" src={currentUser.image || '/placeholder.jpg'}/>

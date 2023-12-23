@@ -33,7 +33,7 @@ const createWidget = async () => {
     // STYLES
     Object.assign(widgetContainer.style, {
       position: 'fixed',
-      bottom: '75px',
+      bottom: '90px',
       right: '30px',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
   });
@@ -42,16 +42,16 @@ const createWidget = async () => {
     const buttonStyles = {
       color: '#00000',
       fontSize: '1.5rem',
-      backgroundColor: '#000000',
+      backgroundColor: '#667eea',
       position: 'absolute',
       right: '0',
       borderRadius: '9999px',
-      padding: '1.7rem 1.7rem',
+      padding: '5px 12px',
       border: 'none',
       cursor: 'pointer',
       transitionProperty: 'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter',
       transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-      transitionDuration: '500ms',
+      transitionDuration: '300ms',
     };
 
     const bodyStyles = {
@@ -76,6 +76,11 @@ const createWidget = async () => {
         paddingLeft: '6px'
     }
 
+    let imageUrl = '';
+    if (assistant && assistant.image && assistant.image.url) {
+      imageUrl = assistant.image.url;
+    }
+
     let statusText = 'Online'
 
     const body = document.createElement('div');
@@ -84,20 +89,45 @@ const createWidget = async () => {
     const button = document.createElement('button');
     Object.assign(button.style, buttonStyles);
 
+    const header = document.createElement('div')
+    header.style.display = 'flex'
+    header.style.alignItems = 'center'
+    header.style.marginTop = '10px'
+    header.style.marginBottom = '5px'
+
+    const titleStatusContainer = document.createElement('div');
+     titleStatusContainer.style.display = 'flex';
+     titleStatusContainer.style.flexDirection = 'column';  // Stack items vertically
+     titleStatusContainer.style.marginLeft = imageUrl ? '5px' : '20px';  
+     titleStatusContainer.style.marginTop = imageUrl ? '3px' : '10px'
+
     const title = document.createElement('h3');
     title.textContent = assistant.title  ? assistant.title : 'Chat Support';
-    title.style.marginLeft = '20px'
+    title.style.marginLeft = '7px'
     title.style.fontSize = '20px'
     title.style.width = '100%'
     title.style.fontWeight = '500'
-    title.style.paddingTop = '10px'
- 
+    title.style.marginTop = '4px'
+
+    const image = document.createElement('img');
+    image.src = imageUrl;
+    image.style.width = '50px';
+    image.style.height = '50px';
+    image.style.borderRadius = '99999px';
+    image.style.marginLeft = '10px';
+    image.style.display = imageUrl ? 'flex' : 'none';
+
+    const buttonImage = document.createElement('img');
+    buttonImage.src = 'http://localhost:3000/chat.svg'
+    buttonImage.style.height = '40px'
+    buttonImage.style.width = '40px'
+    buttonImage.style.marginTop = '7px'
 
     const status = document.createElement('p');
     status.textContent = statusText
     status.style.fontSize = '10px'
-    status.style.marginLeft = '20px'
-    status.style.marginTop = '-10px'
+    status.style.marginLeft = '10px'
+    status.style.marginTop = '-18px'
     status.style.paddingBottom = '5px'
     status.style.color = '#666666'
     status.style.fontWeight = '700'
@@ -155,18 +185,18 @@ const createWidget = async () => {
     // Event listeners
     button.addEventListener('click', () => {
         body.style.display = body.style.display === 'none' ? 'flex' : 'none';
-        button.style.borderRadius = '20px';
+        button.style.opacity = '1';
       });
 
       button.addEventListener('mouseenter', function () {
         if (body.style.display !== 'flex') {
-          button.style.borderRadius = '20px';
+          button.style.opacity = '0.75';
         }
       });
 
       button.addEventListener('mouseleave', function () {
         if (body.style.display !== 'flex') {
-          button.style.borderRadius = '9999px';
+          button.style.opacity = '1';
         }
       });
 
@@ -257,11 +287,24 @@ const createWidget = async () => {
           
           scrollableContent.appendChild(messageContainer);
         });
+
+        const lastMessageElement = scrollableContent.lastChild;
+         if (lastMessageElement) {
+           lastMessageElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+           }
       }
+
+
+    // Append inside the title container
+    titleStatusContainer.appendChild(title);
+    titleStatusContainer.appendChild(status);
+
+    // Append inside the header
+    header.appendChild(image);
+    header.appendChild(titleStatusContainer)
     
     // Append inside of the body
-    body.appendChild(title);
-    body.appendChild(status)
+    body.appendChild(header)
     body.appendChild(scrollableContent);
     body.appendChild(form)
     body.appendChild(brand)
@@ -271,6 +314,8 @@ const createWidget = async () => {
     // Append all of our elements
     widgetContainer.appendChild(body)
     widgetContainer.appendChild(button);
+
+    button.appendChild(buttonImage)
   
     // Append the new container to the body of the document
     document.body.appendChild(widgetContainer);

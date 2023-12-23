@@ -40,8 +40,8 @@ const ErrorInput: React.FC<ErrorInputProps> = ({
         className={`peer w-full p-4 pt-6 font-light bg-white border-2 rounded-md outline-none
           transition disabled:opacity-70 disabled:cursor-not-allowed
           ${formatPrice ? 'pl-9' : 'pl-4'}
-          ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}
-          ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}
+          ${errors[id] ? 'border-rose-500 border-[3.2px]' : 'border-neutral-300'}
+          ${errors[id] ? 'focus:border-rose-500 focus:border-[3.2px]' : 'focus:border-indigo-500 focus:border-[3.2px]'}
         `} />
       <label 
         className={`absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] 

@@ -85,7 +85,7 @@ const NameForm = ({ initialData, assistantId }: NameFormProps) => {
   return (
     <div ref={formRef} className=" border bg-indigo-500/10 rounded-md p-4">
         <div className="flex justify-end -mt-2 pb-1">
-        <Hint sideOffset={40} description={`This is the name your assistant will have`}>
+        <Hint sideOffset={40} description={`This will be the name of your assistant. Only you will be able to see this`}>
            <HelpCircle className=" h-[14px] w-[14px]"/>
          </Hint>
          </div>

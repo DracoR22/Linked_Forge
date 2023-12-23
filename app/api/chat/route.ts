@@ -1,3 +1,5 @@
+import { getMonthlyMessageCountForUser } from "@/actions/get-user-messages-this-month";
+import { MAX_FREE_MESSAGES, MAX_PRO_MESSAGES } from "@/constants/pricing";
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
@@ -15,6 +17,8 @@ export const corsHeaders = {
     return NextResponse.json({}, { headers: corsHeaders });
   }
 
+const DAY_IN_MS = 86_400_000;
+
 export async function POST (req: Request) {
     try {
       const { userMessage, assistantId, sessionId } = await req.json() 
@@ -29,13 +33,41 @@ export async function POST (req: Request) {
         },
         select: {
           name: true,
-          instructions: true
+          instructions: true,
+          user: {
+            select: {
+              id: true,
+              userSubscription: true
+            }
+          }
         }
       })
 
       if (!assistant) {
         return new NextResponse('Assistant not found', { status: 401 })
       }
+
+      const { user: { userSubscription } } = assistant;
+
+      let monthlyMessageLimit = MAX_FREE_MESSAGES; 
+
+    // Check if userSubscription exists and is valid
+      if (userSubscription) {
+        const isValid = 
+        userSubscription.stripePriceId &&
+        userSubscription.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now();
+
+         // If the subscription is not valid, handle it accordingly (e.g., return an error response)
+         if (isValid) {
+          monthlyMessageLimit = MAX_PRO_MESSAGES;
+       }
+     }
+
+     const messagesThisMonth = await getMonthlyMessageCountForUser(assistant.user.id)
+
+     if (messagesThisMonth >= monthlyMessageLimit) {
+      return new NextResponse("Message limit exceeded for this month", { status: 403 });
+     }  
 
       if (!assistant.instructions) {
         return new NextResponse('Assistant needs instructions before start using it', { status: 400 })
@@ -50,23 +82,22 @@ export async function POST (req: Request) {
         userMessage: true,
         assistantMessage: true
       },
-      take: 5,
+      take: 2,
       orderBy: {
         createdAt: 'desc'
       }
     })
 
-    const historyMap = history.map((message) => `USER: ${message.userMessage} ${assistant.name.toUpperCase()}: ${message.assistantMessage}`)
+    const historyMap = history.map((message) => `USER: ${message.userMessage}\nASSISTANT: ${message.assistantMessage}`)
 
     console.log(historyMap)
   
-     const messages: any = [{ role: "system", content: `ONLY generate plain sentences without prefix of ${assistant.name}. DO NOT use any prefix. 
-     Below are relevant details about your role. Only give consice answers, that means never give questions as answers.
-     ${assistant.instructions}
-     Below is the history of the messages of the conversation, use this to have context of the conversation you are in. If its empty that means there is not previous messages in this conversation
-     user:${historyMap}
-     Also you can only answer questions based on your role details.
-     Everytime that you dont know an answer respond the following: 'Im sorry i cant answer that question'
+     const messages: any = [{ role: "system", content: `Generate responses as ${assistant.instructions} without using any specific prefix. 
+     Provide clear and concise answers based on your assigned role's instructions. 
+     If your instructions are unclear, assume the role of a general assistant. 
+     Utilize the following conversation history for context: 
+     ${historyMap.join('\n')}
+     If unsure about an answer, reply: 'Im sorry, I cant answer that question.'
      ` },
      { role: "user", content: userMessage }]
     

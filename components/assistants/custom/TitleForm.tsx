@@ -82,7 +82,7 @@ const TitleForm = ({ initialData, assistantId }: TitleFormProps) => {
   return (
     <div ref={formRef} className="mt-6 border bg-indigo-500/10 rounded-md p-4">
     <div className="flex justify-end -mt-2 pb-1">
-    <Hint sideOffset={40} description={`This will be the text that appears at the top of your widget`}>
+    <Hint sideOffset={40} description={`This will be the public title of your chat widget`}>
        <HelpCircle className=" h-[14px] w-[14px]"/>
      </Hint>
      </div>

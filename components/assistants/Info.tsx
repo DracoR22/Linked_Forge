@@ -1,6 +1,6 @@
 'use client'
 
-import { CreditCard } from "lucide-react"
+import { Bot, CreditCard } from "lucide-react"
 import Image from "next/image"
 import Hint from "../Hint"
 
@@ -18,12 +18,13 @@ const Info = ({ assistant }: InfoProps) => {
             <p className="font-semibold text-xl">
                 {assistant.name}
             </p>
-            <Hint side="top" sideOffset={10} description="You are currently in a free plan">
+            {/* <Hint side="top" sideOffset={10} description="You are currently in a free plan"> */}
             <div className="flex items-center text-xs text-muted-foreground">
-                <CreditCard className="h-4 w-4 mr-1"/>
-                Free
+                {/* <CreditCard className="h-4 w-4 mr-1"/>
+                Free */}
+                <Bot className="h-4 w-4 mr-1"/>
             </div>
-            </Hint>
+            {/* </Hint> */}
         </div>
     </div>
   )
