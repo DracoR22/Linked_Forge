@@ -5,6 +5,8 @@ import CreateAssistantModal from "../modals/CreateAssistantModal"
 import DeleteMessageModal from "../modals/DeleteMessageModal"
 import LinkAssistantModal from "../modals/LinkAssistantModal"
 import ProModal from "../modals/ProModal"
+import DeleteAssistantModal from "../modals/DeleteAssistantModal"
+import ManageSubscriptionModal from "../modals/ManageSubscriptionModal"
 
 
 export const ModalProvider = () => {
@@ -25,6 +27,8 @@ export const ModalProvider = () => {
           <DeleteMessageModal/>
           <LinkAssistantModal/>
           <ProModal/>
+          <DeleteAssistantModal/>
+          <ManageSubscriptionModal/>
         </>
     )
 }

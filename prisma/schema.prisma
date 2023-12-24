@@ -52,7 +52,6 @@ model Assistant {
   instructions String?
   placeholder  String?
   isDeleted    Boolean   @default(false)
-  theme        String    @default("light")
 
   image        Image?
   messages     Message[]

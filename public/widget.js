@@ -29,6 +29,10 @@ const createWidget = async () => {
     });
 
     const assistant = await assistantResponse.json();
+
+    if (assistant.isDeleted === true) {
+      return
+    }
   
     // STYLES
     Object.assign(widgetContainer.style, {

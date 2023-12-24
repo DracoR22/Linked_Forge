@@ -3,16 +3,18 @@
 import LinkButton from "@/components/LinkButton"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import useDeleteAssistantModal from "@/hooks/use-delete-assistant-modal"
 import useLinkAssistantModal from "@/hooks/use-link-assistant-modal"
 import { useParams } from "next/navigation"
 
 interface SettingsProps {
   instructions?: string | null
+  name: string
 }
 
-const Settings = ({ instructions }: SettingsProps) => {
+const Settings = ({ instructions, name }: SettingsProps) => {
 
-  const { onOpen } = useLinkAssistantModal()
+  const { onOpen } = useDeleteAssistantModal()
   const params = useParams()
 
   return (
@@ -38,7 +40,7 @@ const Settings = ({ instructions }: SettingsProps) => {
                 Delete your assistant forever
              </p>
             </div>
-            <Button variant='destructive' className="mt-2 text-sm" >
+            <Button variant='destructive' className="mt-2 text-sm"  onClick={() => onOpen({ assistantId: params.assistantId, assistantName: name })}>
                Delete
             </Button>
         </div>

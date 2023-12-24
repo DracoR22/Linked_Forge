@@ -34,6 +34,7 @@ export async function POST (req: Request) {
         select: {
           name: true,
           instructions: true,
+          isDeleted: true,
           user: {
             select: {
               id: true,
@@ -69,7 +70,7 @@ export async function POST (req: Request) {
       return new NextResponse("Message limit exceeded for this month", { status: 403 });
      }  
 
-      if (!assistant.instructions) {
+      if (!assistant.instructions || assistant.isDeleted === true) {
         return new NextResponse('Assistant needs instructions before start using it', { status: 400 })
       }
 

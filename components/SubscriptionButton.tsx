@@ -2,36 +2,47 @@
 
 import { useProModal } from "@/hooks/use-pro-modal";
 import { Button } from "./ui/button";
+import { CreditCard, Sparkles } from "lucide-react";
+import { useState } from "react";
+import axios from "axios";
+import { LoaderButton } from "./ui/loader-button";
 
 interface SubscriptionButtonProps {
-    isPro: boolean;
+    isPro?: boolean;
   };
 
 const SubscriptionButton = ({ isPro }: SubscriptionButtonProps) => {
 
     const proModal = useProModal();
 
-    // const { execute, isLoading } = useAction(stripeRedirect, {
-    //     onSuccess: (data) => {
-    //       window.location.href = data;
-    //     },
-    //     onError: (error) => {
-    //       toast.error(error);
-    //     }
-    //   });
+    const [isLoading, setIsLoading] = useState(false)
     
-      const onClick = () => {
+      const onClick = async () => {
         if (isPro) {
-        //   execute({});
+          setIsLoading(true);
+          const response = await axios.get("/api/stripe");
+  
+          window.location.href = response.data.url;
+
+          setIsLoading(false)
         } else {
           proModal.onOpen();
         }
       }
 
   return (
-    <Button onClick={onClick} size="sm" className="rounded-sm hidden md:block h-auto py-1.5 px-2" variant="purple">
-        {isPro ? "Manage Subscription" : "Upgrade To Pro"}
-    </Button>
+    <LoaderButton isLoading={isLoading} onClick={onClick} size="sm" className="rounded-sm hidden md:block h-auto py-1.5 px-2 outline-indigo-500" variant="purple">
+        {isPro ? (
+           <>
+          Manage Subscription
+           </>  
+        ) : (
+          <div className="flex items-center gap-x-2">
+            <Sparkles className="h-5 w-5"/>
+            Upgrade To Pro
+          </div>
+        )}
+    </LoaderButton>
   )
 }
 

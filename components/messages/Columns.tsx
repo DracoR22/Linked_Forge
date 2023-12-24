@@ -69,26 +69,7 @@ export const columns: ColumnDef<Messages>[] = [
     id: "actions",
     cell: ({ row }) => {
       const { id } = row.original
-
-      const params = useParams()
-      const { toast } = useToast()
       const { onOpen } = useDeleteMessageModal()
-
-       const handleDelete = async () => {
-         try {
-           await axios.delete(`/api/assistant/${params.assistantId}/messages/${id}`)
-          
-          //  toast({
-          //   title: 'Message deleted'
-          //  })
-         } catch (error: any) {
-          const errorMessage = error.response.data || 'An error occurred';
-          toast({
-              variant: 'destructive',
-              title: errorMessage
-          })
-         }
-       }
 
       return (
         <DropdownMenu>

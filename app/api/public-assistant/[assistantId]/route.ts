@@ -22,7 +22,8 @@ export async function GET (req: Request, { params }: { params: { assistantId: st
             select: {
                 title: true,
                 placeholder: true,
-                image: true
+                image: true,
+                isDeleted: true
             }
         })
 

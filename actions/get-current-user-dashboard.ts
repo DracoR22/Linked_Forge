@@ -17,7 +17,11 @@ const getCurrentUserDashboard = async () => {
                 id: true,
                 image: true,
                 email: true,
+                name: true,
                 assistants: {
+                    where: {
+                        isDeleted: false
+                    },
                     select: {
                         id: true,
                         name: true,

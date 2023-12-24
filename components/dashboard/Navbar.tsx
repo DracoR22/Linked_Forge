@@ -6,6 +6,7 @@ import { Skeleton } from "../ui/skeleton"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import SubscriptionButton from "../SubscriptionButton"
+import UserMenu from "./UserMenu"
 
 interface NavbarProps {
   currentUser: any
@@ -45,7 +46,7 @@ const Navbar = ({ currentUser, isPro }: NavbarProps) => {
             </Button>  */}
       </div>
       <div className="ml-auto flex items-center gap-x-2">
-        <Image className="rounded-full object-cover" height={40} width={40} alt="Avatar" src={currentUser.image || '/placeholder.jpg'}/>
+        <UserMenu currentUser={currentUser} isPro={isPro}/>
       </div>
     </nav>
   )

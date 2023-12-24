@@ -12,7 +12,8 @@ const SettingsPage = async ({ params } : { params: { assistantId: string } }) =>
       id: params.assistantId
     },
     select: {
-      instructions: true
+      instructions: true,
+      name: true
     }
   })
 
@@ -35,7 +36,7 @@ const SettingsPage = async ({ params } : { params: { assistantId: string } }) =>
       </div>
 
       <div className="mt-6">
-         <Settings instructions={assistant.instructions}/>
+         <Settings instructions={assistant.instructions} name={assistant.name}/>
       </div>
     </div>
   )

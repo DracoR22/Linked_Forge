@@ -1,5 +1,7 @@
+'use client'
+
 import { useProModal } from "@/hooks/use-pro-modal"
-import { Dialog, DialogClose, DialogContent } from "../ui/dialog"
+import { Dialog, DialogContent } from "../ui/dialog"
 import Image from "next/image"
 import { LoaderButton } from "../ui/loader-button"
 import { useState } from "react"
@@ -14,15 +16,6 @@ const ProModal = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const { toast }= useToast()
-
-    // const { execute, isLoading } = useAction(stripeRedirect, {
-    //   onSuccess(data) {
-    //     window.location.href = data
-    //   },
-    //   onError(error) {
-    //     toast.error(error)
-    //   },
-    // })
 
     const onClick = async () => {
       try {
