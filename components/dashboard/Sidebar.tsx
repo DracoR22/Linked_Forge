@@ -67,7 +67,7 @@ const Sidebar = ({ storageKey = "c-sidebar-state", currentUser }: SidebarProps) 
         [id]: !expanded[id]
     }))
   }
- 
+
   return (
     <>
     <div onClick={() => router.push('/dashboard')}

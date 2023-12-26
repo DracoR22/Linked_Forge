@@ -37,7 +37,7 @@ const sendMail = async (options: EmailOptions): Promise<void> => {
            </tr>
            <tr>
               <td style="padding: 20px;">
-                <p>Dear ${data.userName},</p>
+                <p>Dear ${data.name},</p>
                 <p>Thank you for signing up for our service. To activate your account, please click the button below:</p>
                 <p style="text-align: center;">
                     <h2>${data.activationCode}</h2>

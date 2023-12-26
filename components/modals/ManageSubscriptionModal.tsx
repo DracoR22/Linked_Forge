@@ -19,7 +19,8 @@ const ManageSubscriptionModal = () => {
        <DialogContent>
          <DialogHeader>
             <DialogTitle>
-                Manage or cancel your plan
+                {isPro && "You are a Pro member"}
+                {!isPro && "You are a Free member"}
             </DialogTitle>
          </DialogHeader>
          <Separator/>

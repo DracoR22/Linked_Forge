@@ -1,10 +1,13 @@
-import Navbar from "@/components/marketing/Navbar"
+import Navbar from "@/components/auth/Navbar"
+
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     return (
       <div className="h-full">
          <Navbar/>
-         {children}
+         <div className="mt-16">
+           {children}
+         </div>
       </div>
     )
   }

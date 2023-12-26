@@ -31,18 +31,20 @@ const SubscriptionButton = ({ isPro }: SubscriptionButtonProps) => {
       }
 
   return (
-    <LoaderButton isLoading={isLoading} onClick={onClick} size="sm" className="rounded-sm hidden md:block h-auto py-1.5 px-2 outline-indigo-500" variant="purple">
-        {isPro ? (
-           <>
-          Manage Subscription
-           </>  
-        ) : (
-          <div className="flex items-center gap-x-2">
-            <Sparkles className="h-5 w-5"/>
-            Upgrade To Pro
-          </div>
-        )}
-    </LoaderButton>
+    <>
+    {isPro && (
+      <LoaderButton isLoading={isLoading} onClick={onClick} size="sm" className="rounded-sm hidden md:flex h-auto py-1.5 px-2 outline-indigo-500" variant="purple">
+        Manage Subscription
+     </LoaderButton>
+    )}
+
+    {!isPro && (
+       <Button onClick={onClick} className="rounded-sm hidden md:flex h-auto py-1.5 px-2 outline-indigo-500" variant="purple">
+       <Sparkles className="h-5 w-5"/>
+       Upgrade To Pro
+       </Button>
+    )}
+    </>
   )
 }
 

@@ -1,6 +1,3 @@
-import getUserAssistantIdMessages from "@/actions/get-user-assistant-id-messages"
-import Info from "@/components/assistants/Info"
-import { Separator } from "@/components/ui/separator"
 import { columns } from "@/components/messages/Columns"
 import { DataTable } from "@/components/messages/DataTable"
 import getAssistantMessages from "@/actions/get-assistant-messages"

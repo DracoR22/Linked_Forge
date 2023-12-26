@@ -44,7 +44,7 @@ export async function GET() {
                     name: 'LinkForgeAI Pro',
                     description: 'Prepare for the pinnacle of AI with an unlimited experience'
                 },
-                unit_amount: 3999,
+                unit_amount: 2999,
                 recurring: {
                     interval: 'month'
                 }

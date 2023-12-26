@@ -11,7 +11,6 @@ const PlatformLayout = async ({ children }: { children: React.ReactNode }) => {
 
     return (
       <main className="h-full">
-         <ModalProvider/>
          <Navbar currentUser={currentUserDashboard} isPro={isPro}/>
          <div className="pt-20 md:pt-24 px-6 xl:mx-[100px]">
             <div className="flex gap-x-7">

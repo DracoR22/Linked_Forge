@@ -1,7 +1,4 @@
-import getUserAssistantIdMessages from "@/actions/get-user-assistant-id-messages"
-import Info from "@/components/assistants/Info"
 import Settings from "@/components/assistants/settings/Settings"
-import { Separator } from "@/components/ui/separator"
 import db from "@/lib/db"
 
 

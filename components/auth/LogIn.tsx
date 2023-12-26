@@ -61,24 +61,20 @@ const LogIn = () => {
 
     try {
       await signIn('google', { callbackUrl: '/dashboard '});
-      
     } catch (error) {
       console.error(error);
     }
   };
 
-  // if (session) {
-  //   // Redirect only after successful sign-in
-  //   redirect('/dashboard');
-  // }
-
-
   return (
     <div className="grid lg:grid-cols-2">
       <form onSubmit={handleSubmit(onSubmit)}className="mx-12">
-        <h1 className="text-3xl font-semibold pt-10">
-          Log In
+        <h1 className="text-3xl font-bold pt-10">
+          Welcome <span className="text-indigo-500"> Back! </span>
         </h1>
+        <p className="mt-4 text-neutral-600 text-sm">
+          We are glad to see you again!
+        </p>
         <div className="pt-[27px]">
           {/* EMAIL */}
          <Label className="uppercase font-bold">
@@ -109,13 +105,13 @@ const LogIn = () => {
           <hr className="flex-grow border-t border-neutral-400" />
         </div>
 
-             <Button onClick={socialAuth} 
-              className="w-full bg-white text-black border hover:bg-neutral-200">
-               Continue with Google 
-               <span className="ml-3">
-               <FcGoogle />
+        <Button onClick={socialAuth} 
+               className="gap-x-4 w-full font-semibold py-6 bg-white text-black border border-neutral-500 hover:bg-neutral-200 transition">
+                <span className="ml-3">
+               <FcGoogle className="h-5 w-5"/>
                </span>
-             </Button>
+               Continue with Google 
+        </Button>
         </div>
       </form>
 

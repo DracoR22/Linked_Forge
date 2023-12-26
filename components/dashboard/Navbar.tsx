@@ -4,18 +4,17 @@ import { useSession } from "next-auth/react"
 import Image from "next/image"
 import { Skeleton } from "../ui/skeleton"
 import Link from "next/link"
-import { Button } from "../ui/button"
 import SubscriptionButton from "../SubscriptionButton"
 import UserMenu from "./UserMenu"
 
 interface NavbarProps {
-  currentUser: any
+  currentUser?: any
   isPro: boolean
 }
 
 const Navbar = ({ currentUser, isPro }: NavbarProps) => {
 
-  const { data: session, status } = useSession()
+  const { status } = useSession()
 
   if (status === 'loading') {
    return (

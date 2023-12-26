@@ -38,7 +38,7 @@ export async function POST(req: Request) {
             data
         })
     } catch (error) {
-        return new NextResponse('Email couldnt be sent.', { status: 500 });
+        return new NextResponse('Email could not be sent.', { status: 500 });
     }
 
     return NextResponse.json({ activationToken: activationToken.token })

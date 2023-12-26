@@ -1,6 +1,7 @@
 import { getConversationsCountForUser } from "@/actions/get-conversations-count-user";
 import getCurrentUserServer from "@/actions/get-current-user-server";
 import { getGraphRevenueUser } from "@/actions/get-graph-revenue-user";
+import getSession from "@/actions/get-session";
 import { getUserAssistantsCount } from "@/actions/get-user-assistants-count";
 import { getMonthlyMessageCountForUser } from "@/actions/get-user-messages-this-month";
 import Banner from "@/components/Banner";
@@ -17,16 +18,13 @@ import { CreditCard, Crown } from "lucide-react";
 
 const DashboardPage = async () => {
 
-  const currentUser = await getCurrentUserServer()
+  const session = await getSession()
+  if (!session) return null
 
-  if (!currentUser) {
-    return null
-  }
-
-  const userMessageCountMonth = await getMonthlyMessageCountForUser(currentUser.id);
-  const userConversationCount = await getConversationsCountForUser(currentUser.id)
-  const userGraphRevenue = await getGraphRevenueUser(currentUser.id)
-  const userAssistants = await getUserAssistantsCount(currentUser.id)
+  const userMessageCountMonth = await getMonthlyMessageCountForUser(session.user.id);
+  const userConversationCount = await getConversationsCountForUser(session.user.id)
+  const userGraphRevenue = await getGraphRevenueUser(session.user.id)
+  const userAssistants = await getUserAssistantsCount(session.user.id)
 
   const isPro = await checkSubscription()
 
