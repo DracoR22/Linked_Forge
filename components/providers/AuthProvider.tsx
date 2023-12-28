@@ -9,7 +9,7 @@ interface Props {
 
 export default function AuthProvider({children}: Props) {
     return (
-        <SessionProvider >
+        <SessionProvider>
             {children}
         </SessionProvider>
     )
