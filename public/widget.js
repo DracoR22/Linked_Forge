@@ -24,7 +24,7 @@ const createWidget = async () => {
     widgetContainer.id = `widget-container-${aiId}`; // Use the AI ID for uniqueness
 
     // FETCH ASSISTANT DATA
-    const assistantResponse = await fetch(`linked-forge-ai.vercel.app/api/public-assistant/${aiId}`, {
+    const assistantResponse = await fetch(`https://linked-forge-ai.vercel.app/api/public-assistant/${aiId}`, {
       method: 'GET'
     });
 
@@ -134,7 +134,7 @@ const createWidget = async () => {
     image.style.display = imageUrl ? 'flex' : 'none';
 
     const buttonImage = document.createElement('img');
-    buttonImage.src = 'linked-forge-ai.vercel.app/chat.svg'
+    buttonImage.src = 'https://linked-forge-ai.vercel.app/chat.svg'
     buttonImage.style.height = '35px'
     buttonImage.style.width = '35px'
     buttonImage.style.marginTop = '7px'
@@ -238,7 +238,7 @@ const createWidget = async () => {
         // API call
         statusText = 'Typing...'
         status.textContent = statusText
-        const response = await fetch('linked-forge-ai.vercel.app/api/chat', {
+        const response = await fetch('https://linked-forge-ai.vercel.app/api/chat', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
