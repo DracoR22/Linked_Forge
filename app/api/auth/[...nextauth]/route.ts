@@ -6,7 +6,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import bcrypt from 'bcrypt'
 import db from '@/lib/db'
 
-export const authOptions: AuthOptions = {
+const authOptions: AuthOptions = {
     adapter: PrismaAdapter(db),
     pages: {
         signIn: '/log-in'
