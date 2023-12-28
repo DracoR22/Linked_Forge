@@ -6,6 +6,7 @@ import { Skeleton } from "../ui/skeleton"
 import Link from "next/link"
 import SubscriptionButton from "../SubscriptionButton"
 import UserMenu from "./UserMenu"
+import MobileSidebar from "./MobileSidebar"
 
 interface NavbarProps {
   currentUser?: any
@@ -21,7 +22,7 @@ const Navbar = ({ currentUser, isPro }: NavbarProps) => {
     <nav className="fixed z-50 top-0 px-10 w-full h-14 border-b shadow-sm bg-white flex items-center">
       <div className="flex items-center gap-x-4">
         <div className="hidden md:flex">
-           <Skeleton className="w-[200px] h-8"/>
+           <Skeleton className="w-[50px] h-[50px] rounded-full"/>
         </div>
       </div>
       <div className="ml-auto flex items-center gap-x-2">
@@ -33,6 +34,7 @@ const Navbar = ({ currentUser, isPro }: NavbarProps) => {
 
   return (
     <nav className="fixed z-50 top-0 px-10 w-full  border-b shadow-sm bg-white flex items-center">
+      <MobileSidebar currentUser={currentUser}/>
       <div className="flex items-center gap-x-4">
         <Link href={'/dashboard'} className="hidden md:flex my-2 cursor-pointer">
            <Image src={'/ultimate.svg'} alt="LinkedForgeAi" width={500} height={500} className="w-[50px] rounded-full"/>

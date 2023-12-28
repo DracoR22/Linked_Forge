@@ -67,7 +67,7 @@ const DashboardPage = async () => {
         
       </div>
       <Separator className="my-4"/>
-      <div className="grid gap-4 grid-cols-3">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-3">
          <MessagesCount messages={userMessageCountMonth} isPro={isPro}/>
          <ConversationsCount conversations={userConversationCount}/>
          <AssistantsCount assistants={userAssistants}/>

@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation"
 import Hint from "../Hint"
 import { cn } from "@/lib/utils"
 import { useSession } from "next-auth/react"
+import { Skeleton } from "../ui/skeleton"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -53,7 +54,17 @@ interface DataTableProps<TData, TValue> {
     }
 
     if (status === 'loading') {
-      return <div>loading</div>
+      return (
+        <>
+         <div className="mt-10 flex items-center justify-between mb-2">
+          <Skeleton className="h-10 w-[400px]" />
+         </div>
+
+         <div className="mt-4">
+           <Skeleton className="w-full h-[300px]"/>
+         </div>
+        </>
+      )
     }
   
     return (

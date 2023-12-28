@@ -38,14 +38,14 @@ const AssistantIdPage = async ({ params } : { params: { assistantId: string } })
            <LinkButton instructions={assistant.instructions}/>
          </div>
        <div className="-mt-[50px]">
-         <h1 className="font-medium text-2xl mt-6">
+         <h1 className="hidden sm:flex font-medium text-2xl mt-6">
             Assistant Overview
          </h1>
-         <p className="text-sm mt-1 text-neutral-600">
+         <p className="hidden sm:flex text-sm mt-1 text-neutral-600">
             See how {assistant?.name} is doing
          </p>
        </div>
-       <div className="grid gap-4 grid-cols-3 mt-6">
+       <div className="grid gap-4 grid-cols-1 sm:grid-cols-3 mt-12 sm:mt-6">
           <AssistantMessagesMonth messages={assistantMonthMessages}/>
           <AssistantMessages messages={messagesCount}/>
           <AssistantConversations conversations={conversationsCount}/>

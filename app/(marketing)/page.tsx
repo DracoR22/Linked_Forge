@@ -15,7 +15,6 @@ const MarketingPage = async () => {
     redirect('/dashboard')
   }
 
-
   return (
    <div className="min-h-full flex flex-col">
     {/* COLOR CONTAINER */}

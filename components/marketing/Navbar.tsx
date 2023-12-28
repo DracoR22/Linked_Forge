@@ -20,25 +20,16 @@ const Navbar = () => {
   const scrolled = UseScrollTop()
   const router = useRouter()
 
-  const pricingSectionRef = useRef<HTMLDivElement>(null);
-
-  const handleButtonClick = () => {
-    // Check if the ref is available and then scroll to it
-    if (pricingSectionRef.current) {
-      pricingSectionRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <nav className={cn("z-50 bg-background dark:bg-[#1F1F1F] fixed top-0 flex w-full p-4 transition-all",
+    <nav className={cn("z-50 bg-background fixed top-0 flex w-full p-4 transition-all",
     scrolled && "border-b shadow-sm bg-white/75 backdrop-blur-lg")}>
       {/* LOGO */}
-       <div className="hidden md:flex items-center gap-x-4 cursor-pointer">
+       <Link href={'/'} className="hidden md:flex items-center gap-x-4 cursor-pointer">
          <Image src="/ultimate.svg" height={50} width={50} alt="Logo" className="rounded-full"/>
          <p className={cn("font-semibold text-xl", font.className)}>
            Linked <span className="text-indigo-500">Forge AI</span>
          </p>
-       </div>
+       </Link>
 
        {/* SIGN IN AND UP */}
        <div className="md:ml-auto md:justify-end justify-between flex items-center gap-x-2">
