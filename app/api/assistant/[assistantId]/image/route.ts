@@ -2,12 +2,13 @@ import getCurrentUserServer from '@/actions/get-current-user-server';
 import db from '@/lib/db';
 import cloudinary from '@/lib/cloudinary';
 import { NextResponse } from 'next/server';
+import getSession from '@/actions/get-session';
 
 export async function POST (req: Request, { params }: { params: { assistantId: string }}) {
     try {
-        const currentUser = await getCurrentUserServer()
+        const session = await getSession()
 
-        if (!currentUser) {
+        if (!session || !session.user.id) {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 
@@ -24,7 +25,7 @@ export async function POST (req: Request, { params }: { params: { assistantId: s
         const assistant = await db.assistant.findUnique({
             where: {
                 id: params.assistantId,
-                userId: currentUser.id
+                userId: session.user.id
             },
             select: {
                 userId: true,
@@ -36,7 +37,7 @@ export async function POST (req: Request, { params }: { params: { assistantId: s
             return new NextResponse('Assistant not found', { status: 400 })
         }
 
-        if (assistant.userId !== currentUser.id) {
+        if (assistant.userId !== session.user.id) {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 
@@ -58,16 +59,16 @@ export async function POST (req: Request, { params }: { params: { assistantId: s
 
 export async function DELETE (req: Request, { params }: { params: { assistantId: string }}) {
     try {
-        const currentUser = await getCurrentUserServer()
+        const session = await getSession()
 
-        if (!currentUser) {
+        if (!session || !session.user.id) {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 
         const assistant = await db.assistant.findUnique({
             where: {
                 id: params.assistantId,
-                userId: currentUser.id
+                userId: session.user.id
             },
             select: {
                 id: true,
@@ -80,7 +81,7 @@ export async function DELETE (req: Request, { params }: { params: { assistantId:
             return new NextResponse('Assistant not found', { status: 400 })
         }
 
-        if (assistant.userId !== currentUser.id) {
+        if (assistant.userId !== session.user.id) {
             return new NextResponse('Unauthorized', { status: 401 })
         }
 

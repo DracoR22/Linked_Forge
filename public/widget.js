@@ -45,17 +45,18 @@ const createWidget = async () => {
     // STYLES
     const buttonStyles = {
       color: '#00000',
-      fontSize: '1.5rem',
       backgroundColor: '#667eea',
-      position: 'absolute',
-      right: '0',
-      borderRadius: '9999px',
-      padding: '5px 12px',
+      position: 'fixed',
+      right: '30px',
       border: 'none',
       cursor: 'pointer',
-      transitionProperty: 'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter',
-      transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
       transitionDuration: '300ms',
+      width: '72px',        // Set a width for the button
+      height: '69px',
+      display: 'flex',                  // Add flex display
+      justifyContent: 'center',         // Center content horizontally
+      alignItems: 'center',
+      zIndex: '9999'
     };
 
     const bodyStyles = {
@@ -66,7 +67,8 @@ const createWidget = async () => {
         flexDirection: 'column',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
         marginBottom: '20px',
-        borderRadius: '10px'
+        borderRadius: '10px',
+        zIndex: '9999'
     }
 
     const inputStyles = {
@@ -75,9 +77,13 @@ const createWidget = async () => {
         display: 'flex',
         marginLeft: '5px',
         marginRight: '5px',
+        marginBottom: '0',
+        fontWeight: '300',
         border: 'none',
         outline: 'none',
-        paddingLeft: '6px'
+        paddingLeft: '6px',
+        fontSize: '13px',
+        color: '#00000'
     }
 
     let imageUrl = '';
@@ -92,12 +98,15 @@ const createWidget = async () => {
   
     const button = document.createElement('button');
     Object.assign(button.style, buttonStyles);
+    button.style.setProperty('border-radius', '9999px', 'important');
+    button.style.setProperty('padding', '5px 12px', 'important');
 
     const header = document.createElement('div')
     header.style.display = 'flex'
     header.style.alignItems = 'center'
     header.style.marginTop = '10px'
     header.style.marginBottom = '5px'
+    header.style.height = '60px'
 
     const titleStatusContainer = document.createElement('div');
      titleStatusContainer.style.display = 'flex';
@@ -112,6 +121,9 @@ const createWidget = async () => {
     title.style.width = '100%'
     title.style.fontWeight = '500'
     title.style.marginTop = '4px'
+    title.style.marginBottom = '0';
+    title.style.paddingBottom = '3px';
+    // title.style.marginBottom = '-3px'; 
 
     const image = document.createElement('img');
     image.src = imageUrl;
@@ -123,15 +135,17 @@ const createWidget = async () => {
 
     const buttonImage = document.createElement('img');
     buttonImage.src = 'http://localhost:3000/chat.svg'
-    buttonImage.style.height = '40px'
-    buttonImage.style.width = '40px'
+    buttonImage.style.height = '35px'
+    buttonImage.style.width = '35px'
     buttonImage.style.marginTop = '7px'
+
+    button.appendChild(buttonImage)
 
     const status = document.createElement('p');
     status.textContent = statusText
     status.style.fontSize = '10px'
     status.style.marginLeft = '10px'
-    status.style.marginTop = '-18px'
+    status.style.marginTop = '0';
     status.style.paddingBottom = '5px'
     status.style.color = '#666666'
     status.style.fontWeight = '700'
@@ -145,7 +159,7 @@ const createWidget = async () => {
 
     const form = document.createElement('form');
     form.style.backgroundColor = '#FFFFFF'
-    // form.style.height = '60px'
+    form.style.height = '60px'
     form.style.marginTop = '7px'
     form.style.marginBottom = '7px'
     
@@ -165,6 +179,8 @@ const createWidget = async () => {
     brand.style.fontSize = '10px'
     brand.style.color = '#666666'
     brand.style.fontWeight = '600'
+    brand.style.marginTop = '0'
+    brand.style.marginBottom = '7px'
 
     const openingText = document.createElement('div')
     openingText.textContent = assistant.placeholder ? assistant.placeholder : 'Hi, I am your AI assistant, ask me anything!'
@@ -318,8 +334,6 @@ const createWidget = async () => {
     // Append all of our elements
     widgetContainer.appendChild(body)
     widgetContainer.appendChild(button);
-
-    button.appendChild(buttonImage)
   
     // Append the new container to the body of the document
     document.body.appendChild(widgetContainer);

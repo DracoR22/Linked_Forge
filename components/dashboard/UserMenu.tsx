@@ -4,6 +4,7 @@ import Image from "next/image"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { CreditCard, Crown, LogOutIcon, Sparkles, User } from "lucide-react"
 import { useManageSubscriptionModal } from "@/hooks/use-manage-subscription-modal"
+import { signOut } from "next-auth/react"
 
 interface UserMenuProps {
     currentUser: any
@@ -11,7 +12,6 @@ interface UserMenuProps {
 }
 
 const UserMenu = ({ currentUser, isPro }: UserMenuProps) => {
-
    
   const manageSubscriptionModal = useManageSubscriptionModal()
     
@@ -37,7 +37,7 @@ const UserMenu = ({ currentUser, isPro }: UserMenuProps) => {
                   Manage subscription
             </DropdownMenuItem>
 
-            <DropdownMenuItem className="flex items-center gap-x-2 cursor-pointer mt-1">
+            <DropdownMenuItem className="flex items-center gap-x-2 cursor-pointer mt-1" onClick={() => signOut()}>
                 <LogOutIcon className="h-5 w-5 text-indigo-500"/>
                  Log Out
             </DropdownMenuItem>

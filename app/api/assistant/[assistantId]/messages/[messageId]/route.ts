@@ -28,14 +28,14 @@ export async function DELETE (req: Request, { params }: { params: { assistantId:
             return new NextResponse('Unauthorized', { status: 401 })
         }
 
-        const deletedMessage = await db.message.delete({
-            where: {
-                id: params.messageId,
-                assistantId: params.assistantId
-            }
-        })
+        // const deletedMessage = await db.message.delete({
+        //     where: {
+        //         id: params.messageId,
+        //         assistantId: params.assistantId
+        //     }
+        // })
 
-        return NextResponse.json(deletedMessage)
+        return NextResponse.json(assistant)
     } catch (error) {
         console.error('ASSISTANT_DELETE_MESSAGES', error);
         return new NextResponse('Internal Error', { status: 500 })

@@ -53,7 +53,7 @@ const sendMail = async (options: EmailOptions): Promise<void> => {
   </html>
     `
     const mailOptions = {
-        from: process.env.SMTP_MAIL,
+        from: `"Linked Forge AI" <${process.env.SMTP_MAIL}>`,
         to: email,
         subject,
         html

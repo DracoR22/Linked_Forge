@@ -4,6 +4,13 @@ import Sidebar from "@/components/dashboard/Sidebar"
 import { ModalProvider } from "@/components/providers/ModalProvider"
 import { checkSubscription } from "@/lib/subscription"
 
+export async function generateMetadata() {
+
+  return  {
+      title: 'Dashboard'
+  }
+}
+
 const PlatformLayout = async ({ children }: { children: React.ReactNode }) => {
 
   const currentUserDashboard = await getCurrentUserDashboard();

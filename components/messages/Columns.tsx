@@ -65,30 +65,30 @@ export const columns: ColumnDef<Messages>[] = [
         )
       }
   },
-  {
-    id: "actions",
-    cell: ({ row }) => {
-      const { id } = row.original
-      const { onOpen } = useDeleteMessageModal()
+  // {
+  //   id: "actions",
+  //   cell: ({ row }) => {
+  //     const { id } = row.original
+  //     const { onOpen } = useDeleteMessageModal()
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="p-4 focus-visible:ring-indigo-500 focus-visible:ring-offset-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4"/>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" >
-            <div onClick={() => onOpen({ messageId: id })}>
-               <DropdownMenuItem className="cursor-pointer">
-                 <Trash className="h-4 w-4 mr-2"/>
-                   Delete
-               </DropdownMenuItem>
-            </div>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    }
-  }
+  //     return (
+  //       <DropdownMenu>
+  //         <DropdownMenuTrigger asChild>
+  //           <Button variant="ghost" className="p-4 focus-visible:ring-indigo-500 focus-visible:ring-offset-0">
+  //             <span className="sr-only">Open menu</span>
+  //             <MoreHorizontal className="h-4 w-4"/>
+  //           </Button>
+  //         </DropdownMenuTrigger>
+  //         <DropdownMenuContent align="end" >
+  //           <div onClick={() => onOpen({ messageId: id })}>
+  //              <DropdownMenuItem className="cursor-pointer">
+  //                <Trash className="h-4 w-4 mr-2"/>
+  //                  Delete
+  //              </DropdownMenuItem>
+  //           </div>
+  //         </DropdownMenuContent>
+  //       </DropdownMenu>
+  //     )
+  //   }
+  // }
 ]

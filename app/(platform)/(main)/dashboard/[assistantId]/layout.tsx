@@ -2,7 +2,22 @@ import getUserAssistantHeader from "@/actions/get-user-assistant-header";
 import Banner from "@/components/Banner";
 import Info from "@/components/assistants/Info";
 import { Separator } from "@/components/ui/separator";
+import db from "@/lib/db";
 import { checkSubscription } from "@/lib/subscription";
+
+export async function generateMetadata({ children, params }: { children: React.ReactNode; params: {assistantId: string} }) {
+  const assistant = await db.assistant.findUnique({
+    where: {
+      id: params.assistantId
+    },
+    select: {
+      name: true
+    }
+  })
+  return  {
+      title: assistant?.name || 'Dashboard'
+  }
+}
 
 const PlatformLayout = async ({ children, params }: { children: React.ReactNode; params: {assistantId: string} }) => {
 
