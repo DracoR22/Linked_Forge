@@ -23,7 +23,7 @@ const UserMenu = ({ currentUser, isPro }: UserMenuProps) => {
   return (
     <DropdownMenu>
         <DropdownMenuTrigger className="rounded-full outline-indigo-500">
-          <Image className="rounded-full object-cover cursor-pointer" height={40} width={40} alt="Avatar" src={currentUser.image || '/placeholder.jpg'}/>
+          <Image className="rounded-full object-cover cursor-pointer" height={40} width={40} alt="Avatar" src={currentUser.image || '/linkedforge.svg'}/>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mr-6">
 

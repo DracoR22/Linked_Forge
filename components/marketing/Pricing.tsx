@@ -36,7 +36,7 @@ const Pricing = () => {
             <p className='py-2 border-b mx-8 flex items-center gap-x-4'><CheckCircle className="text-indigo-500"/> Priority email support</p>
           </div>
           <button onClick={() => router.push('/sign-up')} className='bg-indigo-500 w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6
-            text-white hover:bg-600 transition duration-500'>Sign Up</button>
+            text-white hover:bg-indigo-600 transition duration-500'>Sign Up</button>
         </div>
     </div>  
 </div>
