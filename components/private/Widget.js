@@ -24,7 +24,7 @@ const createWidget = async () => {
     widgetContainer.id = `widget-container-${aiId}`; // Use the AI ID for uniqueness
 
     // FETCH ASSISTANT DATA
-    const assistantResponse = await fetch(`https://linked-forge-ai.vercel.app/api/public-assistant/${aiId}`, {
+    const assistantResponse = await fetch(`https://linkedforgeai.com/api/public-assistant/${aiId}`, {
       method: 'GET'
     });
 
@@ -172,7 +172,7 @@ const createWidget = async () => {
     Object.assign(input.style, inputStyles)
 
     const brand = document.createElement('p');
-    brand.textContent = 'Powered by Linked Forge'
+    brand.textContent = 'Powered by '
     brand.style.display = 'flex'
     brand.style.alignItems = 'flex-center'
     brand.style.justifyContent = 'center'
@@ -181,6 +181,9 @@ const createWidget = async () => {
     brand.style.fontWeight = '600'
     brand.style.marginTop = '0'
     brand.style.marginBottom = '7px'
+
+    const linkText = document.createElement('a');
+    linkText.textContent = 'Linked Forge'
 
     const openingText = document.createElement('div')
     openingText.textContent = assistant.placeholder ? assistant.placeholder : 'Hi, I am your AI assistant, ask me anything!'
@@ -322,6 +325,8 @@ const createWidget = async () => {
     // Append inside the header
     header.appendChild(image);
     header.appendChild(titleStatusContainer)
+
+    brand.appendChild(linkText)
     
     // Append inside of the body
     body.appendChild(header)

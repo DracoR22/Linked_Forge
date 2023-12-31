@@ -43,7 +43,7 @@ const MarketingPage = async () => {
             </div>
           </div>
 
-          <div id="get-started" className='mb-12 mt-20 px-6 lg:px-8'>
+          <div id="get-started" className='mb-5 mt-20 px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl sm:text-center'>
           <h2 className='mt-2 font-bold text-3xl text-gray-900 sm:text-5xl'>
               Start chatting in <span className="text-indigo-500">minutes</span> 

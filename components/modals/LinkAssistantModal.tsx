@@ -25,7 +25,7 @@ const LinkAssistantModal = () => {
 
     const { assistantId } = data
 
-    const linkCode = `<script data-ai-id="${assistantId}" src="http://localhost:3000/widget.js"></script>`
+    const linkCode = `<script data-ai-id="${assistantId}" src="https://linkedforgeai.com/widget.js"></script>`
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -45,7 +45,7 @@ const LinkAssistantModal = () => {
           </h3>
           <div className="bg-neutral-200 rounded-md w-full h-[130px] flex text-sm">
              <p className="px-4 flex items-center">
-             &lt;script <br/> data-ai-id=&quot;{assistantId}&quot; src=&quot;http://localhost:3000/widget.js&quot;&gt; <br/>
+             &lt;script <br/> data-ai-id=&quot;{assistantId}&quot; src=&quot;https://linkedforgeai.com/widget.js&quot;&gt; <br/>
              &lt;/script&gt;
              </p>
              <div className="flex items-end cursor-pointer mb-3 mr-3" onClick={() => onCopyToClipboard(linkCode)}>

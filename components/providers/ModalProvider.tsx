@@ -8,6 +8,7 @@ import ProModal from "../modals/ProModal"
 import DeleteAssistantModal from "../modals/DeleteAssistantModal"
 import ManageSubscriptionModal from "../modals/ManageSubscriptionModal"
 import ActivateAccountModal from "../modals/ActivateAccountModal"
+import ResetPasswordModal from "../modals/ResetPasswordModal"
 
 
 export const ModalProvider = () => {
@@ -31,6 +32,7 @@ export const ModalProvider = () => {
           <DeleteAssistantModal/>
           <ManageSubscriptionModal/>
           <ActivateAccountModal/>
+          <ResetPasswordModal/>
         </>
     )
 }

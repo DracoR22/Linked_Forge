@@ -7,8 +7,6 @@ import Image from "next/image"
 import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { useRef } from "react"
-import Pricing from "./Pricing"
 
 const font = Poppins({
   subsets: ["latin"],
@@ -22,7 +20,7 @@ const Navbar = () => {
 
   return (
     <nav className={cn("z-50 bg-background fixed top-0 flex w-full p-4 transition-all",
-    scrolled && "border-b shadow-sm bg-white/75 backdrop-blur-lg")}>
+    scrolled && "border-b shadow-sm bg-white/75 backdrop-blur-md")}>
       {/* LOGO */}
        <Link href={'/'} className="hidden md:flex items-center gap-x-4 cursor-pointer">
          <Image src="/ultimate.svg" height={50} width={50} alt="Logo" className="rounded-full"/>

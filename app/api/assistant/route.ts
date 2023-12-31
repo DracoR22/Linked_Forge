@@ -1,5 +1,6 @@
 import getCurrentUserDashboard from "@/actions/get-current-user-dashboard";
 import getCurrentUserServer from "@/actions/get-current-user-server";
+import getSession from "@/actions/get-session";
 import db from "@/lib/db";
 import { checkSubscription } from "@/lib/subscription";
 import { NextResponse } from "next/server"
@@ -12,7 +13,26 @@ export async function POST(req: Request) {
             return new NextResponse("An assistant name is required", { status: 400 });
         }
 
-        const currentUser = await getCurrentUserServer()
+        const session = await getSession()
+
+        if (!session || !session.user.id) {
+            return new NextResponse("Unauthorized", { status: 401 });
+        }
+
+        const currentUser = await db.user.findUnique({
+            where: {
+              id: session.user.id
+            },
+            select: {
+                id: true,
+                assistants: {
+                    where: {
+                        isDeleted: false
+                    },
+                    select: { id: true }
+                }
+            }
+        })
 
         if(!currentUser) {
             return new NextResponse('Unauthorized', { status: 401 })
@@ -30,7 +50,7 @@ export async function POST(req: Request) {
 
         const existingAssistant = await db.user.findFirst({
             where: {
-                id: currentUser.id,
+                id: session.user.id,
                 assistants: {
                     some: {
                         name: name,
@@ -45,7 +65,7 @@ export async function POST(req: Request) {
 
         const newAssistant = await db.assistant.create({
             data: {
-                userId: currentUser.id,
+                userId: session.user.id,
                 name
             }
         })

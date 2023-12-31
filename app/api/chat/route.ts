@@ -83,9 +83,9 @@ export async function POST (req: Request) {
         userMessage: true,
         assistantMessage: true
       },
-      take: 2,
+      take: 3,
       orderBy: {
-        createdAt: 'desc'
+        createdAt: 'asc'
       }
     })
 
@@ -98,13 +98,14 @@ export async function POST (req: Request) {
      If your instructions are unclear, assume the role of a general assistant. 
      Utilize the following conversation history for context: 
      ${historyMap.join('\n')}
-     If unsure about an answer, reply: 'Im sorry, I cant answer that question.'
+     If unsure about an answer, reply: 'Im sorry, I cant answer that question.' don't try to make up an answer.
      ` },
      { role: "user", content: userMessage }]
     
       const completion = await openai.chat.completions.create({
         messages: messages, 
         model: "gpt-3.5-turbo",
+        temperature: 0
       });
 
       if (!completion.choices[0].message.content) {

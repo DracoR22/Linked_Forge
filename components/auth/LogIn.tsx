@@ -12,6 +12,7 @@ import { signIn, useSession } from 'next-auth/react'
 import LoginFormSchema from "@/lib/validations/login"
 import { useToast } from "../ui/use-toast"
 import { LoaderButton } from "../ui/loader-button"
+import useResetPasswordModal from "@/hooks/use-reset-password"
 
 const LogIn = () => {
 
@@ -22,6 +23,7 @@ const LogIn = () => {
 
   const { toast } = useToast()
 
+  const resetPasswordModal = useResetPasswordModal()
  
   const {register, handleSubmit, formState: {errors}} = useForm<FieldValues>({
     resolver: zodResolver(LoginFormSchema),
@@ -89,6 +91,13 @@ const LogIn = () => {
         </Label>
          <div className="py-3">
          <ErrorInput type="password" id='password' label='Password' disabled={isLoading} register={register} errors={errors} required/>
+         </div>
+
+         <div className="mb-4">
+           <p onClick={() => resetPasswordModal.onOpen()}
+           className="text-indigo-500 hover:text-indigo-600 text-xs cursor-pointer font-semibold">
+             Forgot your password?
+           </p>
          </div>
 
          {/* SUBMIT */}

@@ -91,6 +91,11 @@ const SignUp = () => {
         </Label>
          <div className="py-3">
          <ErrorInput type="password" id='hashedPassword' label='Password' disabled={isLoading} register={register} errors={errors} required/>
+         {errors.hashedPassword && (
+          <p className="text-xs text-red-500 text-medium mt-2">
+            Password must be at least 8 characters long and contain at least one uppercase letter.
+          </p>
+         )}
          </div>
 
          {/* SUBMIT */}

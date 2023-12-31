@@ -5,6 +5,7 @@ export const getUserAssistantsCount = async (userId: string) => {
   const assistantCount = await db.assistant.count({
     where: {
       userId,
+      isDeleted: false
     }
   });
 

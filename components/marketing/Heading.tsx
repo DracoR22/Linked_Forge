@@ -14,7 +14,7 @@ const Heading = () => {
      </h1>
 
       <h3 className="text-base sm:text-xl font-medium text-black">
-      Craft personalized AI assistants for your website that understand,  <br />
+      No coding skills required, no APIs and a fast setup, get your own AI assistant that  <br />
       engage, and grow with your audience.
       </h3>
 
