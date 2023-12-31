@@ -134,7 +134,7 @@ const createWidget = async () => {
     image.style.display = imageUrl ? 'flex' : 'none';
 
     const buttonImage = document.createElement('img');
-    buttonImage.src = 'https://linked-forge-ai.vercel.app/chat.svg'
+    buttonImage.src = 'https://linkedforgeai.com/chat.svg'
     buttonImage.style.height = '35px'
     buttonImage.style.width = '35px'
     buttonImage.style.marginTop = '7px'
@@ -169,6 +169,7 @@ const createWidget = async () => {
     input.placeholder = 'Type your question here...';
     input.id = 'userMessage';
     input.name = 'userMessage';
+    input.required = true
     Object.assign(input.style, inputStyles)
 
     const brand = document.createElement('p');
@@ -184,6 +185,14 @@ const createWidget = async () => {
 
     const linkText = document.createElement('a');
     linkText.textContent = 'Linked Forge'
+    linkText.style.paddingLeft = '3px'
+    linkText.style.cursor = 'pointer';           // Add cursor pointer style
+    linkText.style.textDecoration = 'none'; 
+    linkText.style.color = '#667eea'  
+    linkText.style.fontWeight = '500'
+
+    linkText.href = 'https://linkedforgeai.com';  // Replace with your actual website URL
+    linkText.target = '_blank';
 
     const openingText = document.createElement('div')
     openingText.textContent = assistant.placeholder ? assistant.placeholder : 'Hi, I am your AI assistant, ask me anything!'
@@ -230,6 +239,10 @@ const createWidget = async () => {
        // Get user input
       userMessage = input.value;
 
+      if (!userMessage || userMessage === '') {
+        return
+      }
+
       chatHistory.push({ role: 'user', content: userMessage });
 
       input.value = ''
@@ -241,7 +254,7 @@ const createWidget = async () => {
         // API call
         statusText = 'Typing...'
         status.textContent = statusText
-        const response = await fetch('https://linked-forge-ai.vercel.app/api/chat', {
+        const response = await fetch('https://linkedforgeai.com/api/chat', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

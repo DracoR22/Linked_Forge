@@ -20,11 +20,15 @@ const Footer = () => {
          </p> */}
        </div>
     <div className="md:ml-auto w-full justify-between md:justify-end flex items-center gap-x-2 text-muted-foreground">
-      <Button variant="ghost" size="sm">
-          Privacy Policy
+      <Button asChild variant="ghost" size="sm">
+          <a href="https://www.termsfeed.com/live/303ab982-969a-4808-9c36-4bca49c946b4" target="_blank">
+            Privacy Policy
+          </a>
       </Button>
-      <Button variant="ghost" size="sm">
-          Terms & Conditions
+      <Button asChild variant="ghost" size="sm">
+        <a href="https://www.termsfeed.com/live/d41352a1-3c56-43bb-b2d6-836987e48997" target="_blank">
+           Terms & Conditions
+        </a>
       </Button>
     </div>
   </div>
