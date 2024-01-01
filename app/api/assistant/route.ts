@@ -54,6 +54,7 @@ export async function POST(req: Request) {
                 assistants: {
                     some: {
                         name: name,
+                        isDeleted: false
                     },
                 },
             },
