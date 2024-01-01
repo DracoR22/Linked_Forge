@@ -53,7 +53,7 @@ const ProModal = () => {
             Upgrade to LinkedForgeAI Pro today!
           </h2>
           <p className="text-sm font-semibold text-neutral-600">
-            For only <span className="text-lg font-bold">29.99$</span>
+            For only <span className="text-lg font-bold">29.99$</span> per month
           </p>
           <div className="pl-3">
             <ul className="text-sm list-disc">
