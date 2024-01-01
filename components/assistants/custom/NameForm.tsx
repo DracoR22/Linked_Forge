@@ -105,7 +105,7 @@ const NameForm = ({ initialData, assistantId }: NameFormProps) => {
         </Button>
       </div>
       {!isEditing && (
-        <p className="text-sm mt-2 text-neutral-600">
+        <p className="text-sm mt-2 text-neutral-600 truncate">
           {initialData.name}
         </p>
       )}

@@ -102,7 +102,7 @@ const PlaceholderForm = ({ initialData, assistantId }: PlaceHolderFormProps) => 
     </Button>
   </div>
   {!isEditing && (
-        <p className={cn(`text-sm mt-2 text-neutral-600`, !initialData.placeholder && "text-slate-500 italic")}>
+        <p className={cn(`text-sm mt-2 text-neutral-600 truncate`, !initialData.placeholder && "text-slate-500 italic")}>
           {initialData.placeholder || "Hi, I am your AI assistant, ask me anything!"}
         </p>
       )}
