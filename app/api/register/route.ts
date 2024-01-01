@@ -2,6 +2,7 @@ import db from '@/lib/db'
 import { NextResponse } from 'next/server'
 import { createActivationToken } from '@/lib/auth/activation-token'
 import sendMail from '@/lib/emails/nodemailer'
+import { rateLimit } from '@/lib/ratelimit'
 
 export async function POST(req: Request) {
    try {
@@ -10,6 +11,13 @@ export async function POST(req: Request) {
     if(!email || !name || !hashedPassword) {
         return new NextResponse('Missing Info', { status: 400 })
     }
+
+    const identifier = req.url + "-" + email
+    const { success } = await rateLimit(identifier)
+
+    if(!success) {
+        return new NextResponse('Rate limit exceeded', { status: 429 })
+       }
 
     const existingUser = await db.user.findUnique({
         where: {

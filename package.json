@@ -23,6 +23,8 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@tanstack/react-table": "^8.11.0",
     "@types/jsonwebtoken": "^9.0.5",
+    "@upstash/ratelimit": "^1.0.0",
+    "@upstash/redis": "^1.27.1",
     "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",

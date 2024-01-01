@@ -1,6 +1,7 @@
 import { createResetPasswordToken } from "@/lib/auth/reset-token";
 import db from "@/lib/db";
 import resetPasswordMail from "@/lib/emails/reset-password-mail";
+import { rateLimit } from "@/lib/ratelimit";
 import { NextResponse } from "next/server";
 
 export async function POST (req: Request) {
@@ -11,6 +12,13 @@ export async function POST (req: Request) {
             return new NextResponse('An email is required', { status: 400 })
         }
 
+        const identifier = req.url + "-" + email
+        const { success } = await rateLimit(identifier)
+    
+        if(!success) {
+            return new NextResponse('Rate limit exceeded', { status: 429 })
+           }
+    
         const user = await db.user.findFirst({
             where: {
                 email

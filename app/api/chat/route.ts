@@ -1,6 +1,7 @@
 import { getMonthlyMessageCountForUser } from "@/actions/get-user-messages-this-month";
 import { MAX_FREE_MESSAGES, MAX_PRO_MESSAGES } from "@/constants/pricing";
 import db from "@/lib/db";
+import { rateLimit } from "@/lib/ratelimit";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
@@ -26,6 +27,14 @@ export async function POST (req: Request) {
       if (!userMessage) {
         return new NextResponse("Messages are required", { status: 400 });
       }
+
+      const identifier = assistantId + "-" + sessionId
+      const { success } = await rateLimit(identifier)
+  
+      if(!success) {
+          return new NextResponse('Rate limit exceeded', { status: 429 })
+         }
+  
 
       const assistant = await db.assistant.findUnique({
         where: {
