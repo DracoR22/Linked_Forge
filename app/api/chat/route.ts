@@ -107,7 +107,7 @@ export async function POST (req: Request) {
      If your instructions are unclear, assume the role of a general assistant. 
      Utilize the following conversation history for context: 
      ${historyMap.join('\n')}
-     If unsure about an answer, reply: 'Im sorry, I cant answer that question.' don't try to make up an answer.
+     If you don't know the answer, just say that you don't know, don't try to make up an answer.
      ` },
      { role: "user", content: userMessage }]
     
