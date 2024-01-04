@@ -32,7 +32,6 @@ const MarketingPage = async () => {
 
      <div className="flex flex-col items-center justify-center md:justify-start text-center gap-y-8 flex-1 px-6 pb-10">
         <Heading/>
-        <a href="https://www.producthunt.com/posts/linked-forge-ai?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-linked&#0045;forge&#0045;ai" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=432526&theme=light" alt="Linked&#0032;Forge&#0032;AI - Create&#0032;your&#0032;own&#0032;AI&#0032;chatbot&#0032;assistant&#0032;in&#0032;minutes | Product Hunt" width="250" height="54" /></a>
         <div>
             <div className='mx-auto max-w-6xl px-6 lg:px-8'>
               <div className='mt-16 flow-root sm:mt-24'>
