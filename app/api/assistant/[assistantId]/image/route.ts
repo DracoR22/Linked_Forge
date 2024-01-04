@@ -103,6 +103,6 @@ export async function DELETE (req: Request, { params }: { params: { assistantId:
         }
     } catch (error) {
         console.error('ASSISTANT_DELETE_IMAGE', error);
-        return new NextResponse('Internal Error', { status: 500 })
+        return new NextResponse('Could not upload image, try with another file.', { status: 500 })
     }
 }

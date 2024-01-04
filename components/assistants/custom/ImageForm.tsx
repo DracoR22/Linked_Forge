@@ -165,7 +165,7 @@ const ImageForm = ({ initialData, assistantId }: ImageFormProps) => {
        {!image && !initialData.image &&  (
         <>
         <label htmlFor="image" className="flex items-center justify-center h-60 bg-indigo-500/30 rounded-md cursor-pointer">
-        <input type="file" id="image" className="hidden" onChange={handleFileInputChange}/>
+        <input type="file" id="image" accept=".jpg, .jpeg, .png, .webp"  className="hidden" onChange={handleFileInputChange}/>
         <div className="flex flex-col items-center">
         <ImageIcon className="h-10 w-10 text-slate-500"/>
         <p className="text-neutral-700 text-xs pt-4">
