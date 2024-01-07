@@ -9,6 +9,7 @@ import AssistantMessagesMonth from "@/components/assistants/overview/AssistantMe
 import AssistantOverview from "@/components/assistants/overview/AssistantOverview"
 import { Button } from "@/components/ui/button"
 import db from "@/lib/db"
+import Script from "next/script"
 
 
 const AssistantIdPage = async ({ params } : { params: { assistantId: string } }) => {

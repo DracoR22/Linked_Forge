@@ -1,6 +1,6 @@
 'use client'
 
-import { Layout, Mail, PenSquare, Settings } from "lucide-react"
+import { Gamepad2, Layout, Mail, PenSquare, Settings } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
 import { useMemo } from "react"
 import { AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
@@ -37,6 +37,11 @@ const NavItem = ({ isExpanded, assistant, onExpand, isActive }: NavItemProps) =>
             label: 'Messages',
             href: `/dashboard/${assistant.id}/messages`,
             icon: <Mail className="h-4 w-4 mr-2"/>,
+        },
+        {
+          label: 'Playground',
+          href: `/dashboard/${assistant.id}/playground`,
+          icon: <Gamepad2 className="h-4 w-4 mr-2"/>,
         },
         {
             label: 'Custom',

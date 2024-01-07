@@ -363,5 +363,3 @@ const createWidget = async () => {
   document.addEventListener('DOMContentLoaded', function() {
     createWidget();
   });
-  
-  

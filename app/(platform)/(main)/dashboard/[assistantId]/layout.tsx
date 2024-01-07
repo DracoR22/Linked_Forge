@@ -2,6 +2,7 @@ import getUserAssistantHeader from "@/actions/get-user-assistant-header";
 import Banner from "@/components/Banner";
 import Info from "@/components/assistants/Info";
 import { Separator } from "@/components/ui/separator";
+import { siteConfig } from "@/config/site";
 import db from "@/lib/db";
 import { checkSubscription } from "@/lib/subscription";
 
@@ -15,7 +16,7 @@ export async function generateMetadata({ children, params }: { children: React.R
     }
   })
   return  {
-      title: assistant?.name || 'Dashboard'
+      title: `${assistant?.name} - ${siteConfig.name}` || 'Dashboard'
   }
 }
 

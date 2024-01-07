@@ -28,12 +28,12 @@ export async function POST (req: Request) {
         return new NextResponse("Messages are required", { status: 400 });
       }
 
-      const identifier = assistantId + "-" + sessionId
-      const { success } = await rateLimit(identifier)
+      // const identifier = assistantId + "-" + sessionId
+      // const { success } = await rateLimit(identifier)
   
-      if(!success) {
-          return new NextResponse('Rate limit exceeded', { status: 429 })
-         }
+      // if(!success) {
+      //     return new NextResponse('Rate limit exceeded', { status: 429 })
+      //    }
   
 
       const assistant = await db.assistant.findUnique({
