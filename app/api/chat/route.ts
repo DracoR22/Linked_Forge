@@ -104,10 +104,11 @@ export async function POST (req: Request) {
   
      const messages: any = [{ role: "system", content: `Generate responses as ${assistant.instructions} without using any specific prefix. 
      Provide clear and concise answers based on your assigned role's instructions. 
+     NEVER tell information that was not provided in your instructions, If you don't know the answer, just say that you don't know, don't try to make up an answer.
      If your instructions are unclear, assume the role of a general assistant. 
      Utilize the following conversation history for context: 
      ${historyMap.join('\n')}
-     If you don't know the answer, just say that you don't know, don't try to make up an answer.
+    
      ` },
      { role: "user", content: userMessage }]
     
