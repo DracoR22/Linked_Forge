@@ -10,11 +10,11 @@ const Heading = () => {
          
      <h1 className="text-3xl sm:text-5xl font-bold">
         Your own AI chatbot for your website:
-        <span className="text-indigo-500"> Automate Interactions and Engagement</span>
+        <span className="text-indigo-500"> Imagine having your own ChatGPT!</span>
      </h1>
 
       <h3 className="text-base sm:text-xl font-medium text-black">
-      No coding skills required, no APIs and a fast setup, get your own AI assistant that  <br />
+      No coding skills required, no APIs and a fast setup, get your own AI assistant that
       engage, and grow with your audience.
       </h3>
 
