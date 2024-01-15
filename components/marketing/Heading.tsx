@@ -9,8 +9,8 @@ const Heading = () => {
     <div className="max-w-3xl space-y-6">
          
      <h1 className="text-3xl sm:text-5xl font-bold">
-        Your own AI chatbot for your website:
-        <span className="text-indigo-500"> Imagine having your own ChatGPT!</span>
+        Your Own ChatGPT For Your Website:
+        <span className="text-indigo-500">  Automate Customer Service like Never Before!</span>
      </h1>
 
       <h3 className="text-base sm:text-xl font-medium text-black">

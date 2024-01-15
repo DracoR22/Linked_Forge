@@ -28,7 +28,7 @@ const Pricing = () => {
         
         <div className='w-full shadow-xl bg-white flex flex-col p-4 my-4 rounded-lg hover:scale-105 duration-300'>
           <h2 className='text-indigo-500 text-2xl font-bold text-center py-8'>Pro Plan</h2>
-          <p className='text-center text-4xl font-bold'>$29.99 <span className="font-medium text-lg text-neutral-600">Per Month</span></p> 
+          <p className='text-center text-4xl font-bold'>$29.99 <span className="font-medium text-lg text-neutral-600">/ Month</span></p> 
           <div className='text-start font-medium flex-1'>
             <p className='py-2 border-b mx-8 mt-8 flex items-center gap-x-4'><CheckCircle className="text-indigo-500"/> Unlimited conversations</p>
             <p className='py-2 border-b mx-8 flex items-center gap-x-4'><CheckCircle className="text-indigo-500"/> Up to 10k messages per month</p>
@@ -37,6 +37,9 @@ const Pricing = () => {
           </div>
           <button onClick={() => router.push('/sign-up')} className='bg-indigo-500 w-[200px] rounded-md font-medium my-6 mx-auto py-3 px-6
             text-white hover:bg-indigo-600 transition duration-500'>Sign Up</button>
+            <p className="text-sm text-neutral-600 font-medium">
+              Cancel Anytime / No Contract
+            </p>
         </div>
     </div>  
 </div>
