@@ -102,7 +102,7 @@ export async function POST (req: Request) {
 
     console.log(historyMap)
   
-     const messages: any = [{ role: "system", content: `Generate responses as ${assistant.instructions} without using any specific prefix. 
+     const messages: any = [{ role: "system", content: `Generate responses as ${assistant.instructions}. 
      Provide clear and concise answers based on your assigned role's instructions. 
      NEVER tell information that was not provided in your instructions, If you don't know the answer, just say that you don't know, don't try to make up an answer.
      If your instructions are unclear, assume the role of a general assistant. 

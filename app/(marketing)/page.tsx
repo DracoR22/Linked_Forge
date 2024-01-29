@@ -6,17 +6,19 @@ import Pricing from "@/components/marketing/Pricing";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import Script from "next/script";
 
 const MarketingPage = async () => {
-
+  const aiId = "b50b0e84-b16b-4bf9-bfc1-51af2426bd03";
   const session = await getServerSession()
 
   if (session) {
     redirect('/dashboard')
   }
-
+ 
   return (
    <div className="min-h-full flex flex-col">
+     {/* <script data-ai-id={`${aiId}`} src="https://linkedforgeai.com/widget.js"></script> */}
     {/* COLOR CONTAINER */}
     <div className='relative isolate'>
           <div aria-hidden='true'

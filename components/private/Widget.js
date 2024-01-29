@@ -12,7 +12,6 @@ if (!sessionId) {
 }
 
 const createWidget = async () => {
-// console.log(sessionId)
     // Get the script tag
     const scriptTag = document.querySelector('script[data-ai-id]');
   
