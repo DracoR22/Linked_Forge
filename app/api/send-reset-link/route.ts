@@ -12,12 +12,12 @@ export async function POST (req: Request) {
             return new NextResponse('An email is required', { status: 400 })
         }
 
-        const identifier = req.url + "-" + email
-        const { success } = await rateLimit(identifier)
+        // const identifier = req.url + "-" + email
+        // const { success } = await rateLimit(identifier)
     
-        if(!success) {
-            return new NextResponse('Rate limit exceeded', { status: 429 })
-           }
+        // if(!success) {
+        //     return new NextResponse('Rate limit exceeded', { status: 429 })
+        //    }
     
         const user = await db.user.findFirst({
             where: {

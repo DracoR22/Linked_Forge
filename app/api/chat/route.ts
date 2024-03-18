@@ -1,7 +1,6 @@
 import { getMonthlyMessageCountForUser } from "@/actions/get-user-messages-this-month";
 import { MAX_FREE_MESSAGES, MAX_PRO_MESSAGES } from "@/constants/pricing";
 import db from "@/lib/db";
-import { rateLimit } from "@/lib/ratelimit";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 

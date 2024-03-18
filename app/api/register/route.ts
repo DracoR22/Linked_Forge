@@ -12,12 +12,12 @@ export async function POST(req: Request) {
         return new NextResponse('Missing Info', { status: 400 })
     }
 
-    const identifier = req.url + "-" + email
-    const { success } = await rateLimit(identifier)
+    // const identifier = req.url + "-" + email
+    // const { success } = await rateLimit(identifier)
 
-    if(!success) {
-        return new NextResponse('Rate limit exceeded', { status: 429 })
-       }
+    // if(!success) {
+    //     return new NextResponse('Rate limit exceeded', { status: 429 })
+    //    }
 
     const existingUser = await db.user.findUnique({
         where: {
