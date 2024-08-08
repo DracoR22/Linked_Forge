@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<a href="https://linked-forge-ai.vercel.app">
+  <img src="/public/landing/linked6.png">
+  <h1 align="center">🤖 Linked Forge AI</h1>
+</a>
 
-## Getting Started
+### 📚 Overview
+<p>
+ This platform allows you to design and deploy AI-powered chatbots that can be easily embedded as widgets on any website.
+</p>
 
-First, run the development server:
+### ✨ Features:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 🛠️ Custom AI Chatbots: Create and customize AI-driven chatbots tailored to your specific needs.
+- 🌐 Embeddable Widget: Easily embed your chatbot on any website with a simple snippet of code.
+- 🧪 Playground for Testing: Test and interact with the chatbot you’ve created in a dedicated playground environment.
+- 🔒 Secure Authentication: Integrates NextAuth V4 for secure user authentication.
+
+### 🛠 Tech Stack:
+- ⚛️ Next.js: React-based framework for building server-side rendered and statically generated web applications.
+- 📋 Prisma: An ORM for managing and interacting with the database.
+- 🐚 CockroachDB: A distributed SQL database designed for high availability and horizontal scalability.
+- 🔑 NextAuth V4: A complete solution for authentication in Next.js applications.
+- 🚀 Vercel: Deployment and hosting platform optimized for Next.js applications.
+
+### Customize and prompt your bot assistant
+<img src="/public/landing/linked3.png">
+
+### Test your bot with the playground functionality
+<img src="/public/landing/pg.png">
+
+
+### Prerequisites
+
+**Node version 14.x**
+
+### Cloning the repository
+
+```shell
+git clone https://github.com/DracoR22/Linked_Forge
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Install packages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```shell
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Setup .env file
 
-## Learn More
+```js
+DATABASE_URL=
 
-To learn more about Next.js, take a look at the following resources:
+ACTIVATION_SECRET=
+RESET_PASSWORD_SECRET=
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_SERVICE=gmail
+SMTP_MAIL=your_email
+SMTP_PASSWORD=password
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+OPENAI_API_KEY=
 
-## Deploy on Vercel
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+NEXTAUTH_SECRET=
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+STRIPE_API_KEY=
+STRIPE_WEBHOOK_SECRET=
+
+NEXT_PUBLIC_APP_URL=https://linkedforgeai.com
+
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+
+NODE_TLS_REJECT_UNAUTHORIZED=0
+```
+
+### Start the app
+
+```shell
+npm run dev
+```
+
+## Available commands
+
+Running commands with npm `pnpm [command]`
+
+| command | description                              |
+| :------ | :--------------------------------------- |
+| `dev`   | Starts a development instance of the app |
